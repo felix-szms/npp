@@ -50,13 +50,9 @@ export function NucleusFallback({
       aria-label={
         split
           ? t(
-              "Static conceptual fission model: barium-141, krypton-92 and three free neutrons.",
-              "Statik kavramsal fisyon modeli: baryum-141, kripton-92 ve üç serbest nötron.",
-            )
+              "Static conceptual fission model: barium-141, krypton-92 and three free neutrons.")
           : t(
-              "Static conceptual model of a uranium-235 nucleus: 92 protons and 143 neutrons.",
-              "Uranyum-235 çekirdeğinin statik kavramsal modeli: 92 proton ve 143 nötron.",
-            )
+              "Static conceptual model of a uranium-235 nucleus: 92 protons and 143 neutrons.")
       }
     >
       <defs>

@@ -32,7 +32,7 @@
   min-height: 44px;
   padding: 0;
   color: var(--text-navigation);
-  font: 9px var(--font-mono);
+  font: 11px var(--font-mono);
   letter-spacing: 0.8px;
 }
 .reaction-back > span {
@@ -54,18 +54,18 @@
   clip-path: inset(50%);
 }
 .reaction-copy h1 {
-  font-size: clamp(70px, 7.55vw, 126px);
-  line-height: 0.86;
-  letter-spacing: -0.055em;
-  margin: 0 0 27px -3px;
+  font-size: clamp(30px, 3.2vw, 48px);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
   white-space: pre-line;
 }
 .reaction-copy h1 > span {
-  font-size: 1.12em;
-  line-height: 0.8;
+  font-size: 1em;
+  line-height: 1.15;
 }
 .reaction-copy h1 > em {
-  margin-left: 0.035em;
+  margin-left: 0.02em;
 }
 #reaction-instruction {
   max-width: 355px;
@@ -74,18 +74,24 @@
   outline: none !important;
 }
 .reaction-status > p:not(.section-kicker) {
-  color: #a7b0b5;
-  font-size: 16px;
-  line-height: 1.8;
+  color: #bcc4c9;
+  font-size: 14px;
+  line-height: 1.75;
   margin: 0;
 }
-.reaction-status > .reaction-equation {
+.reaction-footer {
   position: fixed;
   left: 3.8%;
-  bottom: 72px;
-  font: 10px/2 var(--font-mono);
+  bottom: 27px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+}
+.reaction-footer .reaction-equation {
+  font: 13px/1.7 var(--font-mono);
   color: var(--text-warm);
-  margin-top: 16px;
 }
 .reaction-equation > span {
   padding: 0 5px;
@@ -106,8 +112,8 @@
   min-height: 44px;
   padding: 0 0 4px;
   border-bottom: 1px solid var(--border-amber);
-  font: 9px var(--font-mono);
-  letter-spacing: 0.4px;
+  font: 500 13px/1.4 var(--font-sans);
+  letter-spacing: 0.02em;
   white-space: nowrap;
 }
 .reaction-action > span {
@@ -116,8 +122,9 @@
 }
 .reaction-action:first-child {
   border: 0;
-  font-size: 11px;
-  letter-spacing: 1.8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   gap: 24px;
 }
 .reaction-action:first-child > span {
@@ -131,11 +138,8 @@
   font-size: 23px;
 }
 .reaction-note {
-  position: fixed;
-  left: 3.8%;
-  bottom: 27px;
-  font: 8px/1.8 var(--font-mono);
-  color: #7c8993;
+  font: 12px/1.7 var(--font-sans);
+  color: #99a6b0;
   margin: 0;
   max-width: 500px;
 }
@@ -173,7 +177,7 @@
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  font: 8px var(--font-mono);
+  font: 10px var(--font-mono);
   letter-spacing: 1.2px;
   color: #b5cddd;
   pointer-events: none;
@@ -181,8 +185,8 @@
 .neutron-caption > span {
   display: block;
   margin-top: 8px;
-  color: #718795;
-  font-size: 7px;
+  color: #92a6b3;
+  font-size: 9px;
   letter-spacing: 1px;
 }
 .is-dragging .neutron-caption {
@@ -223,7 +227,7 @@
   top: -24px;
   left: 50%;
   transform: translateX(-50%);
-  font: 7px var(--font-mono);
+  font: 10px var(--font-mono);
   letter-spacing: 1px;
   color: #b2c5d2;
   white-space: nowrap;
@@ -274,7 +278,7 @@
 .fission-neutron-label small {
   display: block;
   margin-top: 10px;
-  font: 9px/1.8 var(--font-mono);
+  font: 10px/1.8 var(--font-mono);
   letter-spacing: 1.8px;
   color: var(--text-muted-cool);
 }
@@ -286,17 +290,13 @@
   display: block;
   margin-top: 8px;
   color: var(--text-muted-cool);
-  font: 8px var(--font-mono);
+  font: 10px var(--font-mono);
   letter-spacing: 0.5px;
   white-space: nowrap;
 }
 .reaction-copy[data-stage="complete"] .reaction-actions {
   flex-wrap: wrap;
   gap: 12px 26px;
-}
-.reaction-copy[data-stage="complete"] .reaction-note {
-  flex-basis: 100%;
-  max-width: 500px;
 }
 .reactor-entry {
   color: var(--amber);
@@ -310,10 +310,10 @@
   pointer-events: none;
 }
 .reactor-copy h1 {
-  font-size: clamp(42px, 4.8vw, 72px);
-  line-height: 1.02;
-  letter-spacing: -0.06em;
-  margin: 0 0 23px -3px;
+  font-size: clamp(30px, 3.2vw, 48px);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
   white-space: pre-line;
   outline: none !important;
 }
@@ -322,15 +322,15 @@
   margin-bottom: 20px;
 }
 .reactor-description {
-  color: #adb6bb;
-  font-size: 12px;
-  line-height: 1.85;
+  color: #c0c8cc;
+  font-size: 14px;
+  line-height: 1.75;
   margin: 0;
   max-width: 370px;
 }
 .reactor-detail-note {
   color: #a3b5be;
-  font: 10px/1.7 var(--font-mono);
+  font: 12px/1.7 var(--font-sans);
   max-width: 370px;
   margin: 12px 0 0;
 }
@@ -343,7 +343,7 @@
   border-left: 1px solid var(--amber);
   background: var(--surface-label);
   color: #d1d8d8;
-  font: 10px/1.5 var(--font-mono);
+  font: 11px/1.5 var(--font-mono);
   pointer-events: none;
 }
 .reactor-hotspots.is-illustrated .reactor-object-label {
@@ -364,8 +364,8 @@
 }
 .reactor-overview {
   pointer-events: auto;
-  color: #92a3ad;
-  font: 9px var(--font-mono);
+  color: #a9b8c1;
+  font: 500 12px/1.4 var(--font-sans);
   min-height: 44px;
   padding: 0;
 }
@@ -374,8 +374,8 @@
   font-size: 15px;
 }
 .reactor-note {
-  color: #778994;
-  font: 8px/1.8 var(--font-mono);
+  color: #97a5af;
+  font: 12px/1.7 var(--font-sans);
   margin: 0;
 }
 .reactor-source {
@@ -383,13 +383,13 @@
   align-items: center;
   min-height: 24px;
   margin-top: 12px;
-  font: 8px var(--font-mono);
-  color: #9fadaf;
+  font: 12px/1.5 var(--font-sans);
+  color: #b4c0c2;
   pointer-events: auto;
 }
 .reactor-scale {
-  color: #9cabaf;
-  font: 8px var(--font-mono);
+  color: #b5bfc3;
+  font: 10px var(--font-mono);
   letter-spacing: 1px;
 }
 .reactor-scale span {
@@ -416,7 +416,7 @@
   border: 1px solid var(--border-label);
   background: #0b141bd9;
   color: #d1c3a9;
-  font: 9px var(--font-mono);
+  font: 10px var(--font-mono);
   pointer-events: auto;
   transition:
     background 0.25s,
@@ -439,9 +439,9 @@
   left: 55px;
   top: 16px;
   white-space: nowrap;
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 0.6px;
-  color: #b7c4cb;
+  color: #c6d1d7;
   text-shadow: 0 1px 8px #000;
 }
 .hotspot-coolant .hotspot-label {
@@ -489,39 +489,36 @@
   width: min(360px, 23%);
 }
 .is-reactor:not(.is-power) .reactor-copy h1 {
-  font-size: clamp(44px, 4.5vw, 76px);
-  line-height: 0.95;
-  letter-spacing: -0.045em;
-  margin-bottom: 24px;
+  font-size: clamp(30px, 3.2vw, 48px);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
 }
 .is-reactor:not(.is-power) .reactor-copy .section-kicker {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   color: #aaa69e;
-  font:
-    18px/1.4 Georgia,
-    "Times New Roman",
-    serif;
-  letter-spacing: 0;
+  font: 600 15px/1.5 var(--font-serif);
+  letter-spacing: 0.02em;
 }
 .is-reactor:not(.is-power) .reactor-description {
-  max-width: 295px;
-  color: #a6a49d;
+  max-width: 320px;
+  color: #bcbab3;
   font-size: 14px;
   line-height: 1.7;
   white-space: pre-line;
 }
 .is-reactor:not(.is-power) .reactor-copy:not([data-selected="none"]) h1 {
-  font-size: clamp(40px, 3.5vw, 58px);
+  font-size: clamp(26px, 2.8vw, 40px);
 }
 .is-reactor:not(.is-power)
   .reactor-copy:not([data-selected="none"])
   .section-kicker {
   color: var(--amber);
-  font: 10px/1.7 var(--font-mono);
+  font: 11px/1.7 var(--font-mono);
   letter-spacing: 1px;
 }
 .is-reactor:not(.is-power) .reactor-detail-note {
-  color: #9faaa9;
+  color: #b2bcbb;
   font-size: 12px;
 }
 .is-reactor:not(.is-power) .reactor-actions {
@@ -529,8 +526,8 @@
   margin: 24px 0 20px;
 }
 .is-reactor:not(.is-power) .reaction-action {
-  font-size: 10px;
-  letter-spacing: 0.8px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
 }
 .is-reactor:not(.is-power) .reaction-action:first-child {
   gap: 14px;
@@ -541,14 +538,14 @@
   font-size: 20px;
 }
 .is-reactor:not(.is-power) .reactor-note {
-  color: #8a908f;
-  font-size: 10px;
-  max-width: 310px;
+  color: #a3a9a8;
+  font-size: 12px;
+  max-width: 320px;
 }
 .is-reactor:not(.is-power) .reactor-source {
   min-height: 44px;
   margin-top: 2px;
-  font-size: 9px;
+  font-size: 12px;
 }
 .is-reactor:not(.is-power) .reactor-hotspot {
   border-color: transparent;
@@ -576,7 +573,7 @@
   width: 148px;
   text-align: left;
   color: #ddd9d0;
-  font: 10px/1.4 var(--font-mono);
+  font: 12px/1.4 var(--font-mono);
   letter-spacing: 1.1px;
   text-transform: uppercase;
   white-space: normal;
@@ -595,7 +592,7 @@
   max-width: 145px;
   margin-top: 16px;
   color: var(--text-neutral-muted);
-  font: 8px/1.55 var(--font-mono);
+  font: 10px/1.55 var(--font-mono);
   letter-spacing: 0.8px;
 }
 .is-reactor:not(.is-power) .hotspot-coolant .hotspot-label {
@@ -631,7 +628,7 @@
   top: 0;
   width: 154px;
   color: #dbd8cf;
-  font: 9px/1.5 var(--font-mono);
+  font: 11px/1.5 var(--font-mono);
   letter-spacing: 1px;
   text-transform: uppercase;
   pointer-events: none;
@@ -640,7 +637,7 @@
   display: block;
   margin-top: 13px;
   color: var(--text-neutral-muted);
-  font: 8px/1.6 var(--font-mono);
+  font: 10.5px/1.6 var(--font-mono);
   letter-spacing: 0.7px;
 }
 .reactor-annotation::after {
@@ -734,11 +731,10 @@
   max-width: 350px;
   margin: 18px 0 8px;
   color: var(--amber);
-  font:
-    italic 24px/1.25 Georgia,
-    "Times New Roman",
-    serif;
-  letter-spacing: -0.5px;
+  font-size: 24px;
+  line-height: 1.35;
+  font-style: normal;
+  letter-spacing: 0;
 }
 .city-exploration {
   position: absolute;
@@ -754,8 +750,8 @@
 .city-exploration button {
   min-height: 44px;
   border-bottom: 1px solid var(--line);
-  color: #99adb9;
-  font: 10px var(--font-mono);
+  color: #b0c2ce;
+  font: 500 13px/1.4 var(--font-sans);
 }
 .city-exploration button[aria-pressed="true"] {
   color: var(--amber);
@@ -771,7 +767,7 @@
   color: #e8d4b0;
   background: var(--surface-label);
   border-left: 1px solid var(--amber);
-  font: 10px/1.5 var(--font-mono);
+  font: 11px/1.5 var(--font-mono);
   pointer-events: none;
 }
 .city-object-label.is-illustrated {

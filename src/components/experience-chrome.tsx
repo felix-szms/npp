@@ -1,10 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ISOTOPE } from "@/lib/nucleus";
 import { JourneyNavigation } from "./journey-navigation";
 import { LanguageSwitcher, useLanguage } from "./language-provider";
 import type { JourneyController, JourneyPhase } from "./use-journey";
+
+export function AtomMark({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 32 32" aria-hidden="true">
+      <ellipse
+        cx="16"
+        cy="16"
+        rx="13"
+        ry="5.4"
+        transform="rotate(28 16 16)"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.1"
+        opacity="0.75"
+      />
+      <ellipse
+        cx="16"
+        cy="16"
+        rx="13"
+        ry="5.4"
+        transform="rotate(-28 16 16)"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.1"
+        opacity="0.75"
+      />
+      <circle cx="16" cy="16" r="3.1" fill="currentColor" />
+      <circle cx="26.8" cy="10.2" r="1.7" fill="currentColor" />
+      <circle cx="5.2" cy="21.8" r="1.7" fill="currentColor" opacity="0.55" />
+    </svg>
+  );
+}
 
 export function ExperienceHeader({
   journey,
@@ -19,79 +51,29 @@ export function ExperienceHeader({
   onHome: () => void;
   audio: { enabled: boolean; available: boolean; toggle: () => void };
 }) {
-  const { t } = useLanguage();
-  const [brandOpen, setBrandOpen] = useState(false);
-  useEffect(() => {
-    if (!brandOpen) return;
-    const dismiss = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setBrandOpen(false);
-    };
-    document.addEventListener("keydown", dismiss);
-    return () => document.removeEventListener("keydown", dismiss);
-  }, [brandOpen]);
+  const { t, language } = useLanguage();
   return (
     <header className="site-header">
-      <div
-        className="brand"
-        onMouseEnter={() => setBrandOpen(true)}
-        onMouseLeave={(event) => {
-          if (!event.currentTarget.contains(document.activeElement))
-            setBrandOpen(false);
-        }}
-        onFocus={() => setBrandOpen(true)}
-        onBlur={(event) => {
-          if (
-            !event.currentTarget.contains(event.relatedTarget) &&
-            !event.currentTarget.matches(":hover")
-          )
-            setBrandOpen(false);
-        }}
-      >
+      <div className="brand">
         <a
           className="wordmark"
           href="/"
-          aria-label={t("Nuclume home", "Nuclume ana sayfa")}
-          aria-describedby="brand-origin"
+          aria-label={t("Nuclear Power Plant home")}
           onClick={(event) => {
             event.preventDefault();
             onHome();
           }}
         >
-          <svg className="brand-symbol" viewBox="0 0 32 32" aria-hidden="true">
-            <circle cx="11" cy="10" r="6.5" />
-            <circle cx="22" cy="14" r="6.5" />
-            <circle cx="12" cy="23" r="6.5" />
-            <circle cx="23" cy="25" r="4" />
-          </svg>
-          NUCLUME<span>.</span>
+          <AtomMark className="brand-symbol" />
+          <span className="wordmark-text">
+            <span className="wordmark-main">
+              {language === "zh" ? "核电站原理" : "Nuclear Power Plant"}
+            </span>
+            <span className="wordmark-alt">
+              {language === "zh" ? "Nuclear Power Plant" : "核电站原理"}
+            </span>
+          </span>
         </a>
-        <div
-          id="brand-origin"
-          role="tooltip"
-          className="brand-tooltip"
-          hidden={!brandOpen}
-        >
-          <span className="brand-tooltip-kicker">
-            {t("Behind the name", "İsmin hikâyesi")}
-          </span>
-          <span className="brand-tooltip-words">
-            <span>
-              <strong>Nucleus</strong>
-              <small>{t("Atomic nucleus", "Atom çekirdeği")}</small>
-            </span>
-            <span aria-hidden="true">+</span>
-            <span>
-              <strong>Lumen</strong>
-              <small>{t("Latin for light", "Latince ışık")}</small>
-            </span>
-          </span>
-          <span className="brand-tooltip-caption">
-            {t(
-              "From an atom’s nucleus to the light of a city.",
-              "Atomun çekirdeğinden bir şehrin ışığına.",
-            )}
-          </span>
-        </div>
       </div>
       <JourneyNavigation
         journey={journey}
@@ -104,10 +86,10 @@ export function ExperienceHeader({
         className="sound-control"
         aria-label={
           audio.enabled
-            ? t("Turn sound design off", "Ses tasarımını kapat")
-            : t("Turn sound design on", "Ses tasarımını aç")
+            ? t("Turn sound design off")
+            : t("Turn sound design on")
         }
-        title={t("Optional sound design", "İsteğe bağlı ses tasarımı")}
+        title={t("Optional sound design")}
         aria-pressed={audio.enabled}
         disabled={!audio.available}
         onClick={audio.toggle}
@@ -164,19 +146,19 @@ export function MotionControl({
       aria-label={
         phase === 3
           ? playing
-            ? t("Pause city motion", "Şehir hareketini duraklat")
-            : t("Resume city motion", "Şehir hareketini sürdür")
+            ? t("Pause city motion")
+            : t("Resume city motion")
           : phase === 2
             ? playing
-              ? t("Pause reactor motion", "Reaktör hareketini duraklat")
-              : t("Resume reactor motion", "Reaktör hareketini sürdür")
+              ? t("Pause reactor motion")
+              : t("Resume reactor motion")
             : phase === 1
               ? playing
-                ? t("Pause reaction", "Tepkimeyi duraklat")
-                : t("Resume reaction", "Tepkimeyi sürdür")
+                ? t("Pause reaction")
+                : t("Resume reaction")
               : playing
-                ? t("Pause rotation", "Dönüşü duraklat")
-                : t("Resume rotation", "Dönüşü sürdür")
+                ? t("Pause rotation")
+                : t("Resume rotation")
       }
       aria-pressed={!playing}
       disabled={reducedMotion || unavailable}
@@ -199,8 +181,8 @@ export function MotionControl({
       </svg>
       <span>
         {playing && !reducedMotion
-          ? t("Pause motion", "Hareketi duraklat")
-          : t("Motion paused", "Hareket duraklatıldı")}
+          ? t("Pause motion")
+          : t("Motion paused")}
       </span>
     </button>
   );
@@ -257,18 +239,18 @@ export function AtomReticle({
       <div className="atom-annotation atom-annotation--isotope">
         <i className="annotation-leader" aria-hidden="true" />
         <span>
-          {ISOTOPE.protons} {t("PROTONS", "PROTON")}
+          {ISOTOPE.protons} {t("PROTONS")}
           <br />
-          {ISOTOPE.neutrons} {t("NEUTRONS", "NÖTRON")}
+          {ISOTOPE.neutrons} {t("NEUTRONS")}
           <br />
-          {t("URANIUM", "URANYUM")}–{ISOTOPE.massNumber}
+          {t("URANIUM")}–{ISOTOPE.massNumber}
         </span>
       </div>
       <div className="atom-annotation atom-annotation--potential">
         <span>
-          {t("NUCLEAR", "NÜKLEER")}
+          {t("NUCLEAR")}
           <br />
-          {t("POTENTIAL", "POTANSİYEL")}
+          {t("POTENTIAL")}
         </span>
         <i className="annotation-leader" aria-hidden="true" />
       </div>

@@ -28,7 +28,7 @@ export const REACTOR_PARTS = {
     label: "Coolant",
     title: "Heat, carried away.",
     description:
-      "Pressurized water stays liquid as it flows upward through the core and removes heat. The primary loop transfers heat to a separate water circuit in a steam generator; primary coolant does not enter the turbine.",
+      "Pressurized water stays liquid as it flows upward through the core and removes heat. The primary loop transfers heat to a separate water circuit in a steam generator; primary coolant does not enter the turbine. The water also serves as the moderator: it slows fast neutrons so they are more likely to cause further fission.",
     detail: "Primary coolant outlet",
     note: "Pressurized liquid · a separate primary circuit.",
     position: [4.2, 2.2, 0.4],

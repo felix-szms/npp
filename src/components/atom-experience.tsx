@@ -202,12 +202,12 @@ export function AtomExperience() {
         }
       >
         {poweringCity
-          ? t("Skip to city exploration", "Şehir keşfine geç")
+          ? t("Skip to city exploration")
           : insideReactor
-            ? t("Skip to reactor exploration", "Reaktör keşfine geç")
+            ? t("Skip to reactor exploration")
             : reacting
-              ? t("Skip to reaction", "Tepkimeye geç")
-              : t("Skip to exploration", "Keşfe geç")}
+              ? t("Skip to reaction")
+              : t("Skip to exploration")}
       </a>
       <ExperienceHeader
         journey={journey}
@@ -262,23 +262,15 @@ export function AtomExperience() {
             aria-label={
               poweringCity
                 ? t(
-                    "Conceptual journey from reactor heat to a powered city",
-                    "Reaktör ısısından elektrikle aydınlanan bir şehre kavramsal yolculuk",
-                  )
+                    "Conceptual journey from reactor heat to a powered city")
                 : insideReactor
                   ? t(
-                      "Conceptual pressurized water reactor",
-                      "Kavramsal basınçlı su reaktörü",
-                    )
+                      "Conceptual pressurized water reactor")
                   : reacting
                     ? t(
-                        "Conceptual uranium-235 fission",
-                        "Kavramsal uranyum-235 fisyonu",
-                      )
+                        "Conceptual uranium-235 fission")
                     : t(
-                        "Interactive uranium-235 nucleus",
-                        "Etkileşimli uranyum-235 çekirdeği",
-                      )
+                        "Interactive uranium-235 nucleus")
             }
             aria-describedby={
               poweringCity
@@ -428,16 +420,12 @@ export function AtomExperience() {
         )}
         <p id="interaction-help" className="sr-only" hidden={reacting}>
           {t(
-            "A conceptual uranium-235 nucleus, containing 92 protons and 143 neutrons. Scroll or use the exploration buttons to move closer. Drag with a mouse or use arrow keys to rotate. Space pauses motion. Home resets the view. Colors, positions, motion, and atmospheric motes are illustrative, not a physical simulation.",
-            "92 proton ve 143 nötron içeren kavramsal uranyum-235 çekirdeği. Yaklaşmak için kaydırın veya keşif düğmelerini kullanın. Döndürmek için fareyle sürükleyin veya yön tuşlarını kullanın. Boşluk tuşu hareketi duraklatır. Home tuşu görünümü sıfırlar. Renkler, konumlar, hareket ve atmosfer parçacıkları temsilidir; fiziksel simülasyon değildir.",
-          )}
+            "A conceptual uranium-235 nucleus, containing 92 protons and 143 neutrons. Scroll or use the exploration buttons to move closer. Drag with a mouse or use arrow keys to rotate. Space pauses motion. Home resets the view. Colors, positions, motion, and atmospheric motes are illustrative, not a physical simulation.")}
         </p>
         {webgl === false && (
           <p className="fallback-note" role="status">
             {t(
-              "STATIC VIEW · 3D is unavailable. The illustrated model remains interactive.",
-              "STATİK GÖRÜNÜM · 3B kullanılamıyor. Çizim üzerinden etkileşime devam edebilirsiniz.",
-            )}
+              "STATIC VIEW · 3D is unavailable. The illustrated model remains interactive.")}
           </p>
         )}
         <MotionControl

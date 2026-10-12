@@ -9,15 +9,21 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { ZH_TEXT } from "@/lib/zh";
 
-type Language = "en" | "tr";
+type Language = "en" | "zh";
 type LanguageContextValue = {
   language: Language;
   setLanguage: (language: Language) => void;
-  t: (english: string, turkish: string) => string;
+  t: (english: string) => string;
 };
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
+
+const TITLES: Record<Language, string> = {
+  en: "Nuclear Power Plant Principles · 核电站原理",
+  zh: "核电站原理 · Nuclear Power Plant Principles",
+};
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, updateLanguage] = useState<Language>("en");
@@ -25,16 +31,26 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const saved = localStorage.getItem("nuclume-language");
-      if (saved === "en" || saved === "tr") updateLanguage(saved);
+      if (saved === "en" || saved === "zh") {
+        updateLanguage(saved);
+        return;
+      }
+      // First visit: follow the browser language.
+      const preferred = navigator.language?.toLowerCase() ?? "";
+      if (preferred.startsWith("zh")) updateLanguage("zh");
     } catch {}
   }, []);
 
   useEffect(() => {
-    document.documentElement.lang = language;
-    document.title =
-      language === "tr"
-        ? "NUCLUME — Atomdan Şehre"
-        : "NUCLUME — From Atom to City";
+    document.documentElement.lang = language === "zh" ? "zh-CN" : language;
+    // Next.js metadata re-asserts its own <title> right after hydration;
+    // re-apply ours one tick later so the localized title sticks.
+    const apply = () => {
+      document.title = TITLES[language];
+    };
+    apply();
+    const id = window.setTimeout(apply, 250);
+    return () => window.clearTimeout(id);
   }, [language]);
 
   const setLanguage = useCallback((next: Language) => {
@@ -44,8 +60,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     } catch {}
   }, []);
   const t = useCallback(
-    (english: string, turkish: string) =>
-      language === "tr" ? turkish : english,
+    (english: string) =>
+      language === "zh" ? (ZH_TEXT[english] ?? english) : english,
     [language],
   );
   const value = useMemo(
@@ -55,6 +71,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   return (
     <LanguageContext.Provider value={value}>
+      {/* Sole owner of the document title (layout metadata declares none):
+          rendering it keeps React's hoistable in sync with the language. */}
+      <title>{TITLES[language]}</title>
       {children}
     </LanguageContext.Provider>
   );
@@ -72,7 +91,7 @@ export function LanguageSwitcher() {
     <div
       className="language-switcher"
       role="group"
-      aria-label={t("Language", "Dil")}
+      aria-label={t("Language")}
     >
       <button
         type="button"
@@ -85,12 +104,12 @@ export function LanguageSwitcher() {
       </button>
       <button
         type="button"
-        lang="tr"
-        aria-label="Türkçe"
-        aria-pressed={language === "tr"}
-        onClick={() => setLanguage("tr")}
+        lang="zh-CN"
+        aria-label="简体中文"
+        aria-pressed={language === "zh"}
+        onClick={() => setLanguage("zh")}
       >
-        TR
+        中文
       </button>
     </div>
   );

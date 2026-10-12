@@ -6,8 +6,7 @@ import {
   type JourneyPhase,
 } from "./use-journey";
 import { useLanguage } from "./language-provider";
-
-const turkishChapters = ["Atom", "Fisyon", "Reaktör", "Şehir"] as const;
+import { ZH_JOURNEY_CHAPTERS, ZH_MOVING_TO, ZH_CHAPTER_OF } from "@/lib/zh";
 
 export function JourneyNavigation({
   journey,
@@ -19,11 +18,11 @@ export function JourneyNavigation({
   onNavigate: (phase: JourneyPhase) => void;
 }) {
   const { language, t } = useLanguage();
-  const chapters = language === "tr" ? turkishChapters : JOURNEY_CHAPTERS;
+  const chapters = language === "zh" ? ZH_JOURNEY_CHAPTERS : JOURNEY_CHAPTERS;
   return (
     <nav
       className="journey-navigation"
-      aria-label={t("Journey chapters", "Yolculuğun bölümleri")}
+      aria-label={t("Journey chapters")}
       aria-busy={journey.busy}
     >
       <ol>
@@ -74,14 +73,12 @@ export function JourneyNavigation({
       </ol>
       <span className="sr-only" role="status" aria-live="polite">
         {journey.motion
-          ? t(
-              `Moving to ${JOURNEY_CHAPTERS[journey.motion.to]}.`,
-              `${turkishChapters[journey.motion.to]} bölümüne geçiliyor.`,
-            )
-          : t(
-              `${JOURNEY_CHAPTERS[journey.phase]}, chapter ${journey.phase + 1} of 4.`,
-              `${turkishChapters[journey.phase]}, 4 bölümün ${journey.phase + 1}. bölümü.`,
-            )}
+          ? language === "zh"
+            ? ZH_MOVING_TO(chapters[journey.motion.to])
+            : `Moving to ${JOURNEY_CHAPTERS[journey.motion.to]}.`
+          : language === "zh"
+            ? ZH_CHAPTER_OF(chapters[journey.phase], journey.phase + 1)
+            : `${JOURNEY_CHAPTERS[journey.phase]}, chapter ${journey.phase + 1} of 4.`}
       </span>
     </nav>
   );

@@ -22,9 +22,7 @@ export function PowerFallback({
         viewBox="0 0 800 500"
         role="img"
         aria-label={t(
-          "Conceptual control room with a wall of plant schematics and two operator workstations. Illustrative displays, no live data.",
-          "Santral şemalarının yer aldığı ekran duvarı ve iki operatör çalışma istasyonuyla kavramsal kontrol odası. Gösterimler açıklayıcıdır, canlı veri içermez.",
-        )}
+          "Conceptual control room with a wall of plant schematics and two operator workstations. Illustrative displays, no live data.")}
       >
         <path
           d="M90 330 380 210 735 355 445 490Z"
@@ -90,9 +88,7 @@ export function PowerFallback({
       }
       role="img"
       aria-label={t(
-        "Conceptual energy journey: separate primary and steam circuits, a turbine shaft driving a generator, transmission lines and a lit city.",
-        "Kavramsal enerji yolculuğu: birbirinden ayrı birincil su ve buhar devreleri, jeneratörü döndüren türbin mili, iletim hatları ve aydınlanan şehir.",
-      )}
+        "Conceptual energy journey: separate primary and steam circuits, a turbine shaft driving a generator, transmission lines and a lit city.")}
     >
       <defs>
         <linearGradient id="power-steel">

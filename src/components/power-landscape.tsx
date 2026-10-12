@@ -139,10 +139,10 @@ export function PowerLandscape({
     context.fillStyle = "#203746";
     context.fillRect(0, 0, 256, 64);
     context.fillStyle = "#cde9f2";
-    context.font = "500 38px sans-serif";
+    context.font = '500 38px "Microsoft YaHei", "PingFang SC", sans-serif';
     context.textAlign = "center";
     context.textBaseline = "middle";
-    context.fillText(language === "tr" ? "HASTANE" : "HOSPITAL", 128, 33);
+    context.fillText(language === "zh" ? "医院" : "HOSPITAL", 128, 33);
     const texture = new CanvasTexture(canvas);
     texture.minFilter = LinearMipmapLinearFilter;
     return texture;

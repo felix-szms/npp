@@ -3,15 +3,15 @@
     top: 21%;
   }
   .is-reactor:not(.is-power) .reactor-copy:not([data-selected="none"]) h1 {
-    font-size: 40px;
-    margin-bottom: 16px;
+    font-size: 34px;
+    margin-bottom: 12px;
   }
   .is-reactor:not(.is-power) .reactor-description {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.6;
   }
   .is-reactor:not(.is-power) .reactor-detail-note {
-    font-size: 11px;
+    font-size: 12px;
   }
   .is-reactor:not(.is-power) .reactor-actions {
     gap: 4px 18px;
@@ -21,8 +21,8 @@
     padding-top: 30px;
   }
   h1 {
-    font-size: min(10vw, 132px);
-    margin-bottom: 24px;
+    font-size: min(7vw, 68px);
+    margin-bottom: 18px;
   }
   .hero-description {
     margin-bottom: 24px;
@@ -33,7 +33,7 @@
 }
 @media (min-width: 761px) and (max-width: 1050px) {
   h1 {
-    font-size: 112px;
+    font-size: 72px;
   }
   .hero-copy {
     left: 6%;
@@ -70,7 +70,7 @@
     max-height: 100%;
   }
   .atom-annotation {
-    font-size: 8px;
+    font-size: 9.5px;
     letter-spacing: 0.8px;
     gap: 9px;
   }
@@ -106,20 +106,20 @@
     bottom: 7%;
   }
   h1 {
-    font-size: clamp(78px, 19.5vw, 115px);
-    line-height: 0.84;
-    margin: 0 0 24px -4px;
+    font-size: clamp(36px, 9.5vw, 54px);
+    line-height: 1.1;
+    margin: 0 0 18px -2px;
   }
   h1 > em {
     margin-top: 4px;
   }
   .hero-description {
-    font-size: 11px;
+    font-size: 12.5px;
     line-height: 1.8;
     margin-bottom: 23px;
   }
   .explore-button {
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 1.4px;
     gap: 15px;
   }
@@ -130,7 +130,7 @@
   .motion-control {
     right: 7%;
     bottom: 18px;
-    font-size: 7px;
+    font-size: 9px;
   }
   .motion-control > span {
     display: none;
@@ -155,7 +155,7 @@
     bottom: 17px;
     max-width: none;
     left: 8%;
-    font-size: 7px;
+    font-size: 9px;
   }
   .about-dialog {
     padding: 42px 28px 28px;
@@ -166,7 +166,7 @@
   .reaction-back {
     top: 75px;
     left: 7%;
-    font-size: 8px;
+    font-size: 10px;
   }
   .reaction-copy {
     left: 7%;
@@ -176,21 +176,24 @@
     max-width: none;
   }
   .reaction-copy h1 {
-    font-size: clamp(50px, 13.5vw, 70px);
-    line-height: 0.94;
-    margin-bottom: 14px;
+    font-size: clamp(28px, 7vw, 42px);
+    line-height: 1.12;
+    margin-bottom: 10px;
   }
   .reaction-copy .section-kicker {
-    font-size: 7px;
+    font-size: 9px;
     margin-bottom: 14px;
   }
   .reaction-status > p:not(.section-kicker) {
-    font-size: 12px;
+    font-size: 13px;
   }
-  .reaction-status > .reaction-equation {
+  .reaction-footer {
     position: static;
-    font-size: 10px;
-    margin-top: 10px;
+    margin-top: 14px;
+    gap: 8px;
+  }
+  .reaction-footer .reaction-equation {
+    font-size: 12px;
   }
   .reaction-equation > span {
     padding: 0 2px;
@@ -201,17 +204,16 @@
     min-height: 44px;
   }
   .reaction-note {
-    position: static;
-    font-size: 10px;
-    max-width: 170px;
+    font-size: 12px;
+    max-width: none;
   }
   .reaction-action {
-    font-size: 9px;
+    font-size: 12px;
     gap: 14px;
   }
   .reaction-action:first-child {
-    font-size: 9px;
-    letter-spacing: 0.5px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
     gap: 14px;
   }
   .reaction-action:first-child > span {
@@ -233,10 +235,10 @@
   .neutron-caption {
     width: 85px;
     top: 60px;
-    font-size: 8px;
+    font-size: 9px;
   }
   .neutron-caption > span {
-    font-size: 8px;
+    font-size: 9px;
   }
   .fragment-labels > span {
     font-size: 13px;
@@ -250,7 +252,7 @@
     display: none;
   }
   .fragment-labels small {
-    font-size: 7px;
+    font-size: 9px;
   }
   .reactor-copy {
     left: 7%;
@@ -259,16 +261,16 @@
     width: auto;
   }
   .reactor-copy h1 {
-    font-size: clamp(32px, 8.8vw, 42px);
-    line-height: 1.04;
-    margin-bottom: 14px;
+    font-size: clamp(24px, 6.5vw, 34px);
+    line-height: 1.14;
+    margin-bottom: 10px;
   }
   .reactor-copy .section-kicker {
-    font-size: 7px;
+    font-size: 9px;
     margin-bottom: 12px;
   }
   .reactor-description {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.7;
     max-width: none;
   }
@@ -277,17 +279,17 @@
     margin: 12px 0 8px;
   }
   .reactor-note {
-    font-size: 10px;
+    font-size: 12px;
   }
   .reactor-source {
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 8px;
   }
   .hotspot-label {
     display: none;
   }
   .reactor-scale {
-    font-size: 7px;
+    font-size: 9px;
   }
   .power-hotspots,
   .power-hotspots.is-illustrated {
@@ -360,7 +362,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0;
   }
   .journey-navigation button::after {
@@ -368,10 +370,10 @@
     right: 5px;
   }
   .journey-navigation button > span:first-child {
-    font-size: 7px;
+    font-size: 8.5px;
   }
   .power-copy .section-kicker {
-    font-size: 6.5px;
+    font-size: 8.5px;
     letter-spacing: 0.8px;
   }
   .is-reactor:not(.is-power) .atom-composition {
@@ -392,8 +394,8 @@
   }
   .is-reactor:not(.is-power) .reactor-copy h1,
   .is-reactor:not(.is-power) .reactor-copy:not([data-selected="none"]) h1 {
-    font-size: clamp(40px, 10.5vw, 56px);
-    margin-bottom: 20px;
+    font-size: clamp(26px, 7vw, 38px);
+    margin-bottom: 12px;
   }
   .is-reactor:not(.is-power) .reactor-copy .section-kicker {
     font-size: 16px;
@@ -434,7 +436,7 @@
     width: 100px;
     transform: translateX(-50%);
     text-align: center;
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.4px;
   }
   .is-reactor:not(.is-power) .hotspot-label::after,
@@ -466,7 +468,7 @@
     bottom: 6%;
   }
   h1 {
-    font-size: 76px;
+    font-size: 34px;
   }
 }
 @media (prefers-reduced-motion: no-preference) {

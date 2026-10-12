@@ -26,35 +26,33 @@ export function CitySignature({ time }: { time: RefObject<number> }) {
     context.fillStyle = "#091b29";
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = "#c9ac7c";
-    context.font = "28px monospace";
-    context.fillText("N U C L U M E", 62, 74);
+    context.font = "500 23px 'JetBrains Mono Variable', monospace";
+    context.fillText("N U C L E A R   P O W E R   P L A N T", 62, 72);
     context.strokeStyle = "#b393604f";
     context.lineWidth = 2;
     context.beginPath();
-    context.moveTo(62, 118);
-    context.lineTo(962, 118);
+    context.moveTo(62, 106);
+    context.lineTo(962, 106);
     context.stroke();
     context.fillStyle = "#e6e8e4";
-    context.font = "49px Arial, sans-serif";
-    context.fillText("GitHub", 62, 218);
-    context.fillText("X", 62, 338);
+    context.font =
+      "900 96px 'Noto Serif SC Variable', 'Noto Serif SC', SimSun, serif";
+    context.fillText("核电站原理", 62, 218);
     context.fillStyle = "#8eaaa9";
-    context.fillText("/", 264, 218);
-    context.fillText("/", 264, 338);
-    context.fillStyle = "#e7d4ae";
-    context.fillText("nuclume", 316, 218);
-    context.fillText("@eaa_ce", 316, 338);
+    context.font =
+      "500 29px 'Inter Variable', 'Noto Serif SC Variable', Arial, sans-serif";
+    context.fillText("从原子到城市 · From Atom to City", 62, 296);
     context.strokeStyle = "#d1b889";
-    context.lineWidth = 4;
-    for (const y of [200, 320]) {
-      context.beginPath();
-      context.moveTo(908, y + 16);
-      context.lineTo(941, y - 17);
-      context.moveTo(913, y - 17);
-      context.lineTo(941, y - 17);
-      context.lineTo(941, y + 11);
-      context.stroke();
-    }
+    context.lineWidth = 3;
+    context.beginPath();
+    context.moveTo(62, 348);
+    context.lineTo(86, 348);
+    context.arc(94, 340, 8, Math.PI * 0.5, Math.PI * 1.5);
+    context.moveTo(94, 332);
+    context.arc(102, 340, 8, Math.PI * 1.5, Math.PI * 0.5);
+    context.moveTo(110, 348);
+    context.lineTo(134, 348);
+    context.stroke();
     const texture = new CanvasTexture(canvas);
     texture.colorSpace = SRGBColorSpace;
     texture.anisotropy = 4;
@@ -161,20 +159,7 @@ export function CitySignature({ time }: { time: RefObject<number> }) {
         geometry={resources.geometries.display}
         material={resources.materials.display}
         position={[0, 1.15, 0.078]}
-        onClick={(event) => {
-          if (event.delta > 3) return;
-          const y = event.uv?.y;
-          if (y === undefined || y > 0.67 || y < 0.11 || time.current < 17)
-            return;
-          event.stopPropagation();
-          window.open(
-            y > 0.36
-              ? "https://github.com/eaabak/nuclume"
-              : "https://x.com/eaa_ce",
-            "_blank",
-            "noopener,noreferrer",
-          );
-        }}
+        onClick={undefined}
       />
     </group>
   );

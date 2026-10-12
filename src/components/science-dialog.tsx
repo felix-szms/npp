@@ -49,71 +49,68 @@ export function ScienceDialog({
       <button
         className="dialog-close"
         aria-label={t(
-          "Close about the experience",
-          "Deneyim hakkındaki bilgiyi kapat",
-        )}
+          "Close about the experience")}
         onClick={onClose}
       >
         ×
       </button>
       <p className="section-kicker">
-        {t("NUCLUME / CHAPTER 01", "NUCLUME / BÖLÜM 01")}
+        {t("Nuclear Power Plant / Chapter 01")}
       </p>
       <h2 id="about-title">
-        {t("A world within.", "İçinde bir dünya.")}
+        {t("A world within.")}
         <br />
-        <em>{t("A world ahead.", "Önümüzde bir gelecek.")}</em>
+        <em>{t("A world ahead.")}</em>
       </h2>
       <p>
         {t(
-          "From a single atom to an entire city. NUCLUME is an exploration of the science behind nuclear energy. This first chapter begins with the nucleus of uranium-235.",
-          "Tek bir atomdan koca bir şehre. NUCLUME, nükleer enerjinin arkasındaki bilimi keşfe çıkarır. İlk bölüm, uranyum-235 çekirdeğiyle başlar.",
-        )}
+          "From a single atom to an entire city — an exploration of the science behind nuclear energy. This first chapter begins with the nucleus of uranium-235.")}
       </p>
       <p>
         {t(
-          "Its 92 protons define it as uranium. Add 143 neutrons and you have 235 nucleons, giving this isotope its name.",
-          "92 proton, bu elementi uranyum yapar. 143 nötronla birlikte toplam 235 nükleon oluşur; bu izotop adını buradan alır.",
-        )}
+          "Its 92 protons define it as uranium. Add 143 neutrons and you have 235 nucleons, giving this isotope its name.")}
+      </p>
+      <p>
+        {t(
+          "The fission fragments are unstable: barium-141 (half-life about 18 minutes) and krypton-92 keep decaying through beta emission into longer chains — the origin of spent fuel's radioactivity.")}
       </p>
       <p className="science-note">
         {t(
-          "This is a conceptual model, not a physical simulation. Colors identify particle types; positions, sizes, spacing, and motion are illustrative. The ambient motes are atmosphere, not emitted particles. Electrons are outside this view.",
-          "Bu, fiziksel simülasyon değil, kavramsal bir modeldir. Renkler parçacık türlerini belirtir; konumlar, boyutlar, aralıklar ve hareket temsilidir. Çevredeki küçük noktalar görsel atmosfer içindir; yayılan parçacıkları göstermez. Elektronlar bu görünümün dışındadır.",
-        )}
+          "This is a conceptual model, not a physical simulation. Colors identify particle types; positions, sizes, spacing, and motion are illustrative. The ambient motes are atmosphere, not emitted particles. Electrons are outside this view.")}
       </p>
       <p className="science-note">
         {t(
-          "An independent educational and artistic project. This simplified experience is not engineering guidance, a safety analysis or reactor-operator training. Source links do not imply endorsement by the cited organizations.",
-          "Bağımsız bir eğitim ve sanat projesidir. Bu sadeleştirilmiş deneyim mühendislik rehberi, güvenlik analizi veya reaktör operatörü eğitimi değildir. Kaynak bağlantıları, ilgili kuruluşların projeyi onayladığı anlamına gelmez.",
-        )}
+          "An independent educational and artistic project. This simplified experience is not engineering guidance, a safety analysis or reactor-operator training. Source links do not imply endorsement by the cited organizations.")}
       </p>
-      <a
-        href="https://www.nrc.gov/education-regulatory-research/the-student-corner/science-101/what-is-a-chain-reaction"
-        target="_blank"
-        rel="noreferrer"
-      >
-        {t("The science, via the U.S. NRC", "Bilimsel kaynak: ABD NRC")}{" "}
-        <ExternalLinkArrow />
-      </a>
-      <a
-        href="https://www.nrc.gov/reactors/power/pwrs"
-        target="_blank"
-        rel="noreferrer"
-      >
-        {t("PWR circuits · U.S. NRC", "PWR devreleri · ABD NRC")}{" "}
-        <ExternalLinkArrow />
-      </a>
-      <a
-        href="https://www.eia.gov/energyexplained/electricity/how-electricity-is-generated.php"
-        target="_blank"
-        rel="noreferrer"
-      >
-        {t("Electricity generation · EIA", "Elektrik üretimi · EIA")}{" "}
-        <ExternalLinkArrow />
-      </a>
+      <h3 className="science-subheading">
+        {t("By the numbers")}
+      </h3>
+      <dl className="science-numbers">
+        <div>
+          <dt>{t("Energy per fission")}</dt>
+          <dd>
+            {t(
+              "≈ 200 MeV (≈ 3.2×10⁻¹¹ J) — hundreds of millions of times the energy of a chemical bond.")}
+          </dd>
+        </div>
+        <div>
+          <dt>{t("Mass into energy")}</dt>
+          <dd>
+            {t(
+              "E = mc²: when 1 kg of uranium-235 fissions completely, about 1 gram of mass becomes energy — roughly 2,500 tonnes of coal.")}
+          </dd>
+        </div>
+      </dl>
+      <p className="science-note">
+        {t(
+          "Next: fusion. Light nuclei release even more energy per kilogram when they combine — the other end of the binding-energy curve. The Sun runs on fusion, and tokamaks such as China's EAST are pursuing it on Earth.")}
+      </p>
+      <p className="science-note">
+        {t(
+          "References: U.S. NRC (chain reaction, PWR circuits) · U.S. EIA (electricity generation). Citation does not imply endorsement.")}
+      </p>
       <a href="/audio/CREDITS.md" target="_blank" rel="noreferrer">
-        {t("Sound sources & CC0 licenses", "Ses kaynakları ve CC0 lisansları")}{" "}
+        {t("Sound sources & CC0 licenses")}{" "}
         <ExternalLinkArrow />
       </a>
     </dialog>

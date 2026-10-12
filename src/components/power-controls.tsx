@@ -2,66 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import { CITY_PLACES, POWER_PART_IDS, POWER_PARTS } from "@/lib/power";
+import {
+  ZH_POWER_PARTS,
+  ZH_CITY_PLACES,
+  ZH_SOURCE_PREFIX,
+} from "@/lib/zh";
 import type { PowerController } from "./use-power";
 import { useLanguage } from "./language-provider";
-
-const powerPartsTr = {
-  heat: {
-    ...POWER_PARTS.heat,
-    label: "Buhar / ısı aktarımı",
-    title: "Isı aktarılır.\nSular ayrı kalır.",
-    description:
-      "Buhar üretecinde sıcak birincil su, metal boruların içinden ısıyı ayrı bir su devresine aktarır. Bu devredeki su buhara dönüşür. İki devrenin suları birbirine karışmaz.",
-    sourceLabel: "ABD NRC",
-  },
-  turbine: {
-    ...POWER_PARTS.turbine,
-    label: "Türbin",
-    title: "Isı harekete\ndönüşür.",
-    description:
-      "Genleşen buhar, türbin kanatlarını ve mili döndürür. Ardından buhar yoğuşturularak suya dönüştürülür ve buhar üretecine geri gönderilir. Türbin enerjiyi harekete dönüştürür; elektrik depolamaz.",
-    sourceLabel: "ABD EIA",
-  },
-  generator: {
-    ...POWER_PARTS.generator,
-    label: "Jeneratör",
-    title: "Hareket elektriğe\ndönüşür.",
-    description:
-      "Aynı mil, jeneratörün rotorunu döndürür. Rotorun değişen manyetik alanı, sabit bobinlerde elektrik indükleyerek mekanik enerjiyi elektrik enerjisine dönüştürür.",
-    sourceLabel: "ABD EIA",
-  },
-  transmission: {
-    ...POWER_PARTS.transmission,
-    label: "İletim",
-    title: "Mesafeleri aşan\nbir bağlantı.",
-    description:
-      "Transformatörler, iletim için gerilimi yükseltir. Enerji nakil hatları elektriği yerleşimlere taşır; trafo merkezleri ise yerel dağıtım için gerilimi düşürür. Mavi ışıklar bu bağlantıyı gösterir, tek tek elektronların hareketini değil.",
-    sourceLabel: "ABD EIA",
-  },
-  city: {
-    ...POWER_PARTS.city,
-    label: "Şehirdeki etkisi",
-    title: "Aydınlanan\nbir dünya.",
-    description:
-      "Evde yanan bir ışık. Hizmet veren bir hastane. Bizi birbirimize bağlayan sokaklar. Elektrik, gündelik yaşamı ve temel kamu hizmetlerini destekler. Bu şehir o bağlantıyı temsil eder; tek bir atom bir şehre enerji sağlayamaz.",
-    sourceLabel: "ABD EIA",
-  },
-};
-
-const cityPlacesTr = {
-  home: {
-    ...CITY_PLACES.home,
-    label: "Evde yanan bir ışık",
-    description:
-      "Sıradan bir akşam: bir yemek, bir sohbet, açık bırakılan bir ışık. Elektrik, gündelik yaşamın bir parçasına dönüşür.",
-  },
-  hospital: {
-    ...CITY_PLACES.hospital,
-    label: "Günün her saati bakım",
-    description:
-      "Elektrik; aydınlatmayı, tıbbi cihazları ve temel hizmetleri destekler. Bu hastane, bir toplumun güvendiği kamu altyapısını temsil eder.",
-  },
-};
 
 export function PowerHotspots({
   power,
@@ -71,8 +18,8 @@ export function PowerHotspots({
   fallback: boolean;
 }) {
   const { t, language } = useLanguage();
-  const parts = language === "tr" ? powerPartsTr : POWER_PARTS;
-  const places = language === "tr" ? cityPlacesTr : CITY_PLACES;
+  const parts = language === "zh" ? ZH_POWER_PARTS : POWER_PARTS;
+  const places = language === "zh" ? ZH_CITY_PLACES : CITY_PLACES;
   return (
     <>
       <div
@@ -81,9 +28,7 @@ export function PowerHotspots({
           power.stage !== "ready" || power.transfer !== null || power.roomOpen
         }
         aria-label={t(
-          "Explore the energy journey",
-          "Enerjinin yolculuğunu keşfet",
-        )}
+          "Explore the energy journey")}
         data-city={
           !power.roomOpen &&
           power.stage === "ready" &&
@@ -114,15 +59,15 @@ export function PowerHotspots({
         <button
           ref={power.roomHotspot}
           className="control-room-entry"
-          aria-label={t("Enter the control room", "Kontrol odasına gir")}
+          aria-label={t("Enter the control room")}
           aria-controls="power-detail"
           aria-expanded={power.roomOpen}
           onClick={power.enterRoom}
         >
           <span aria-hidden="true">⌖</span>
           <span>
-            {t("Control room", "Kontrol odası")}
-            <small>{t("Enter & explore ↗", "İçeri gir ve keşfet ↗")}</small>
+            {t("Control room")}
+            <small>{t("Enter & explore ↗")}</small>
           </span>
         </button>
         {power.stage === "ready" &&
@@ -132,27 +77,25 @@ export function PowerHotspots({
               className="city-exploration"
               role="group"
               aria-label={t(
-                "Explore the illuminated city",
-                "Aydınlanan şehri keşfet",
-              )}
+                "Explore the illuminated city")}
             >
               <button
                 aria-pressed={power.cityPlace === "home"}
                 onClick={() => power.exploreCity("home")}
               >
-                {t("Home", "Ev")}
+                {t("Home")}
               </button>
               <button
                 aria-pressed={power.cityPlace === "hospital"}
                 onClick={() => power.exploreCity("hospital")}
               >
-                {t("Hospital", "Hastane")}
+                {t("Hospital")}
               </button>
               <button
                 aria-pressed={power.cityPlace === null}
                 onClick={() => power.exploreCity(null)}
               >
-                {t("Neighborhood", "Mahalle")}
+                {t("Neighborhood")}
               </button>
             </div>
           )}
@@ -160,43 +103,39 @@ export function PowerHotspots({
           <div
             className="city-camera-controls"
             role="group"
-            aria-label={t("City camera", "Şehir kamerası")}
+            aria-label={t("City camera")}
           >
             <button
-              aria-label={t("Zoom out of the city", "Şehirden uzaklaş")}
+              aria-label={t("Zoom out of the city")}
               onClick={() => power.zoomCity(1 / 1.35)}
             >
               −
             </button>
             <output
               ref={power.zoomLabel}
-              aria-label={t("Zoom level", "Yakınlaştırma düzeyi")}
+              aria-label={t("Zoom level")}
             >
               100%
             </output>
             <button
-              aria-label={t("Zoom in on the city", "Şehre yaklaş")}
+              aria-label={t("Zoom in on the city")}
               onClick={() => power.zoomCity(1.35)}
             >
               +
             </button>
             <button className="city-camera-reset" onClick={power.resetCityView}>
-              {t("Reset view", "Görünümü sıfırla")}
+              {t("Reset view")}
             </button>
             <span>
               {t(
-                "Scroll to zoom · Drag to explore",
-                "Tekerlekle yakınlaş · Sürükleyerek keşfet",
-              )}
+                "Scroll to zoom · Drag to explore")}
             </span>
           </div>
         )}
       </div>
       <p className="sr-only" id="city-navigation-help">
         {t(
-          "Use the mouse wheel or pinch to zoom. Drag to move around the city. With the scene focused, use arrow keys to pan, plus and minus to zoom, and Home to reset.",
-          "Yakınlaştırmak için fare tekerleğini kullanın veya iki parmağınızı açıp kapatın. Şehirde gezinmek için sürükleyin. Sahne odaktayken ok tuşlarıyla gezinin, artı ve eksiyle yakınlaştırmayı değiştirin, Home tuşuyla görünümü sıfırlayın.",
-        )}
+          "Use the mouse wheel or pinch to zoom. Drag to move around the city. With the scene focused, use arrow keys to pan, plus and minus to zoom, and Home to reset.")}
       </p>
       {power.labelPlace && !power.roomOpen && (
         <div
@@ -234,8 +173,8 @@ export function PowerControls({
     power.transfer === "following" ||
     power.transfer === "steaming" ||
     power.transfer === "returning";
-  const content = (language === "tr" ? powerPartsTr : POWER_PARTS)[part];
-  const places = language === "tr" ? cityPlacesTr : CITY_PLACES;
+  const content = (language === "zh" ? ZH_POWER_PARTS : POWER_PARTS)[part];
+  const places = language === "zh" ? ZH_CITY_PLACES : CITY_PLACES;
   const place =
     !power.transfer &&
     power.stage === "ready" &&
@@ -274,62 +213,50 @@ export function PowerControls({
       <>
         <button className="reaction-back" onClick={power.leaveRoom}>
           <span aria-hidden="true">←</span>{" "}
-          {t("Return to the energy journey", "Enerjinin yolculuğuna dön")}
+          {t("Return to the energy journey")}
         </button>
         <div className="reactor-copy power-copy control-room-copy">
           <div id="power-detail" aria-live="polite" aria-atomic="true">
             <p className="section-kicker">
               {t(
-                "PEOPLE / SYSTEMS / OVERSIGHT",
-                "İNSANLAR / SİSTEMLER / GÖZETİM",
-              )}
+                "PEOPLE / SYSTEMS / OVERSIGHT")}
             </p>
             <h1 id="power-title" ref={heading} tabIndex={-1}>
-              {t("Inside the", "Kontrol")}
+              {t("Inside the")}
               <br />
-              {t("control room.", "odasının içinde.")}
+              {t("control room.")}
             </h1>
             <p className="reactor-description">
               {t(
-                "Behind the technology, people. Trained teams monitor the plant, follow procedures and oversee its systems.",
-                "Teknolojinin arkasında insanlar var. Eğitimli ekipler santrali izler, prosedürleri uygular ve sistemlerin işleyişini gözetir.",
-              )}
+                "Behind the technology, people. Trained teams monitor the plant, follow procedures and oversee its systems.")}
             </p>
             <dl className="control-room-notes">
               <div>
-                <dt>{t("Observe", "Gözlemle")}</dt>
+                <dt>{t("Observe")}</dt>
                 <dd>
                   {t(
-                    "The wall brings the plant’s separate systems into one view.",
-                    "Ekran duvarı, santralin ayrı sistemlerini tek bir görünümde bir araya getirir.",
-                  )}
+                    "The wall brings the plant’s separate systems into one view.")}
                 </dd>
               </div>
               <div>
-                <dt>{t("Understand", "Anla")}</dt>
+                <dt>{t("Understand")}</dt>
                 <dd>
                   {t(
-                    "Workstations help operators review conditions and coordinate their work.",
-                    "İş istasyonları, operatörlerin koşulları değerlendirmesine ve çalışmalarını koordine etmesine yardımcı olur.",
-                  )}
+                    "Workstations help operators review conditions and coordinate their work.")}
                 </dd>
               </div>
             </dl>
           </div>
           <button className="reaction-action" onClick={power.leaveRoom}>
-            {t("Return to the landscape", "Genel görünüme dön")}{" "}
+            {t("Return to the landscape")}{" "}
             <span aria-hidden="true">↗</span>
           </button>
           <p className="reactor-note">
             {t(
-              "Illustrative room and displays. No live data or operating controls.",
-              "Oda ve ekranlar temsilidir. Canlı veri veya işletim kontrolü içermez.",
-            )}
+              "Illustrative room and displays. No live data or operating controls.")}
             <br />
             {t(
-              "Your journey is preserved. Press Esc to return.",
-              "Yolculuğunuz korunur. Dönmek için Esc tuşuna basın.",
-            )}
+              "Your journey is preserved. Press Esc to return.")}
           </p>
         </div>
       </>
@@ -338,7 +265,7 @@ export function PowerControls({
     <>
       <button className="reaction-back" onClick={onReturn}>
         <span aria-hidden="true">←</span>{" "}
-        {t("Return to reactor", "Reaktöre dön")}
+        {t("Return to reactor")}
       </button>
       <div
         className="reactor-copy power-copy"
@@ -353,27 +280,25 @@ export function PowerControls({
           <p className="section-kicker">
             {power.stage === "ready" && !power.selected && !power.transfer
               ? t(
-                  "FROM A SINGLE ATOM TO AN ENTIRE CITY",
-                  "TEK BİR ATOMDAN KOSKOCA BİR ŞEHRE",
-                )
+                  "FROM A SINGLE ATOM TO AN ENTIRE CITY")
               : `${content.number} / ${content.label.toLocaleUpperCase(language)}`}
           </p>
           <h1 id="power-title" ref={heading} tabIndex={-1}>
             {cityOverview ? (
               <>
-                {t("From", "Nükleer")}
+                {t("From")}
                 <br />
-                {t("nuclear energy", "enerjiden")}
+                {t("nuclear energy")}
                 <br />
-                {t("to ", "")}
-                <em>{t("everyday life.", "gündelik hayata.")}</em>
+                {t("to ")}
+                <em>{t("everyday life.")}</em>
               </>
             ) : power.transfer === "following" ? (
-              t("Follow the heat.", "Isıyı takip et.")
+              t("Follow the heat.")
             ) : power.transfer === "steaming" ? (
-              t("Follow the steam.", "Buharı takip et.")
+              t("Follow the steam.")
             ) : power.transfer === "returning" ? (
-              t("Back to heat transfer.", "Isı aktarımına dön.")
+              t("Back to heat transfer.")
             ) : (
               (place?.label ?? content.title)
             )}
@@ -381,24 +306,16 @@ export function PowerControls({
           <p className="reactor-description">
             {cityOverview
               ? t(
-                  "A controlled chain reaction creates heat. Heat becomes electricity. Electricity powers homes, hospitals and everyday life.",
-                  "Kontrollü bir zincirleme tepkime ısı üretir. Isı elektriğe dönüşür. Elektrik evlere, hastanelere ve gündelik yaşama güç verir.",
-                )
+                  "A controlled chain reaction creates heat. Heat becomes electricity. Electricity powers homes, hospitals and everyday life.")
               : power.transfer === "following"
                 ? t(
-                    "Pressurized primary water carries heat out of the reactor. Follow its sealed pipe to the steam generator.",
-                    "Basınçlı birincil su, ısıyı reaktörden dışarı taşır. Kapalı boru hattını buhar üretecine kadar takip edin.",
-                  )
+                    "Pressurized primary water carries heat out of the reactor. Follow its sealed pipe to the steam generator.")
                 : power.transfer === "steaming"
                   ? t(
-                      "A separate circuit begins here. Steam leaves the steam generator through the secondary line and expands through the turbine, turning its blades.",
-                      "Burada ayrı bir devre başlar. Buhar, buhar üretecinden ikincil hat boyunca ilerler; türbinde genleşerek kanatları döndürür.",
-                    )
+                      "A separate circuit begins here. Steam leaves the steam generator through the secondary line and expands through the turbine, turning its blades.")
                   : power.transfer === "returning"
                     ? t(
-                        "Follow the secondary line back to its heat source. We are retracing the camera's route; steam flow does not reverse.",
-                        "İkincil hattı ısı kaynağına doğru takip edin. Kamera rotayı geri izler; buharın akış yönü değişmez.",
-                      )
+                        "Follow the secondary line back to its heat source. We are retracing the camera's route; steam flow does not reverse.")
                     : (place?.description ?? content.description)}
           </p>
           {power.transfer && (
@@ -407,26 +324,18 @@ export function PowerControls({
               power.transfer === "reading" ? (
                 <>
                   {t(
-                    "Primary: liquid inside the tubes.",
-                    "Birincil devre: boruların içindeki sıvı.",
-                  )}
+                    "Primary: liquid inside the tubes.")}
                   <br />
                   {t(
-                    "Secondary: separate water around the tubes, becoming steam.",
-                    "İkincil devre: boruların çevresinde buhara dönüşen ayrı su.",
-                  )}
+                    "Secondary: separate water around the tubes, becoming steam.")}
                 </>
               ) : power.transfer === "steaming" ||
                 power.transfer === "returning" ? (
-                t(
-                  "Only secondary steam reaches the turbine. Primary water remains in its own sealed circuit.",
-                  "Türbine yalnızca ikincil devrenin buharı ulaşır. Birincil su kendi kapalı devresinde kalır.",
-                )
+                (
+                  "Only secondary steam reaches the turbine. Primary water remains in its own sealed circuit.")
               ) : (
-                t(
-                  "The blades turn a shaft. That motion drives the generator; the turbine does not store electricity.",
-                  "Kanatlar mili döndürür. Bu hareket jeneratörü çalıştırır; türbin elektrik depolamaz.",
-                )
+                (
+                  "The blades turn a shaft. That motion drives the generator; the turbine does not store electricity.")
               )}
             </p>
           )}
@@ -435,97 +344,70 @@ export function PowerControls({
           <div className="city-finale">
             <p className="city-closing">
               {t(
-                "From the smallest of things, a world of possibilities.",
-                "En küçük şeylerden, olasılıklarla dolu bir dünyaya.",
-              )}
+                "From the smallest of things, a world of possibilities.")}
             </p>
-            <nav
-              className="city-signature-links"
-              aria-label={t("Project and creator", "Proje ve yapımcı")}
-            >
-              <span>{t("BY EAABAK", "YAPIM: EAABAK")}</span>
-              <a
-                href="https://github.com/eaabak/nuclume"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t(
-                  "NUCLUME repository on GitHub (opens in a new tab)",
-                  "GitHub'da NUCLUME deposu (yeni sekmede açılır)",
-                )}
-              >
-                GitHub ↗
-              </a>
-              <a
-                href="https://x.com/eaa_ce"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t(
-                  "eaa_ce on X (opens in a new tab)",
-                  "X'te eaa_ce (yeni sekmede açılır)",
-                )}
-              >
-                X / @eaa_ce ↗
-              </a>
-            </nav>
+            <p className="city-signature-links">
+              <span>核电站原理 · Nuclear Power Plant</span>
+            </p>
           </div>
         )}
         <div className="reactor-actions">
           {power.transfer === "reading" || power.transfer === "turbine" ? (
             <button className="reaction-action" onClick={power.continuePower}>
               {power.transfer === "reading"
-                ? t("Continue to turbine", "Türbine devam et")
-                : t("Continue to generator", "Jeneratöre devam et")}{" "}
+                ? t("Continue to turbine")
+                : t("Continue to generator")}{" "}
               <span aria-hidden="true">↗</span>
             </button>
           ) : power.transfer ? (
             <span className="reactor-scale">
               {power.transfer === "following" ? (
                 <>
-                  {t("PRIMARY WATER", "BİRİNCİL DEVRE SUYU")} <span>→</span>{" "}
-                  {t("HEAT TRANSFER", "ISI AKTARIMI")}
+                  {t("PRIMARY WATER")} <span>→</span>{" "}
+                  {t("HEAT TRANSFER")}
                 </>
               ) : power.transfer === "leaving" ? (
                 <>
-                  {t("MOTION", "HAREKET")} <span>→</span>{" "}
-                  {t("ELECTRICITY", "ELEKTRİK")}
+                  {t("MOTION")} <span>→</span>{" "}
+                  {t("ELECTRICITY")}
                 </>
               ) : power.transfer === "returning" ? (
-                t("RETURNING TO HEAT TRANSFER", "ISI AKTARIMINA DÖNÜLÜYOR")
+                t("RETURNING TO HEAT TRANSFER")
               ) : (
                 <>
-                  {t("SECONDARY STEAM", "İKİNCİL DEVRE BUHARI")} <span>→</span>{" "}
-                  {t("TURBINE", "TÜRBİN")}
+                  {t("SECONDARY STEAM")} <span>→</span>{" "}
+                  {t("TURBINE")}
                 </>
               )}
             </span>
           ) : power.stage === "ready" ? (
             <button className="reaction-action" onClick={onReplay}>
-              {t("Replay this phase", "Bu aşamayı yeniden oynat")}{" "}
+              {t("Replay this phase")}{" "}
               <span aria-hidden="true">↺</span>
             </button>
           ) : (
             <span className="reactor-scale">
-              {t("HEAT", "ISI")} <span>→</span> {t("MOTION", "HAREKET")}{" "}
-              <span>→</span> {t("LIGHT", "IŞIK")}
+              {t("HEAT")} <span>→</span> {t("MOTION")}{" "}
+              <span>→</span> {t("LIGHT")}
             </span>
           )}
           {transferMoving && (
             <button className="reactor-overview" onClick={power.skipTransfer}>
               {power.transfer === "steaming"
-                ? t("Skip to turbine", "Türbine geç")
-                : t("Skip to heat transfer", "Isı aktarımına geç")}{" "}
+                ? t("Skip to turbine")
+                : t("Skip to heat transfer")}{" "}
               <span aria-hidden="true">↗</span>
             </button>
           )}
           {(power.transfer === "steaming" || power.transfer === "turbine") && (
             <button className="reactor-overview" onClick={power.returnToHeat}>
-              {t("Back to heat transfer", "Isı aktarımına dön")}{" "}
+              {t("Back to heat transfer")}{" "}
               <span aria-hidden="true">←</span>
             </button>
           )}
           {(power.transfer === "reading" || power.transfer === "turbine") && (
             <button className="reactor-overview" onClick={power.replayTransfer}>
-              {t("Replay this route", "Bu rotayı yeniden oynat")}{" "}
+              {t("Replay this route")}{" "}
               <span aria-hidden="true">↺</span>
             </button>
           )}
@@ -540,7 +422,7 @@ export function PowerControls({
                 power.setCityPlace(null);
               }}
             >
-              {t("Overview", "Genel görünüm")} <span aria-hidden="true">×</span>
+              {t("Overview")} <span aria-hidden="true">×</span>
             </button>
           )}
           {!power.transfer && power.stage !== "ready" && (
@@ -551,34 +433,25 @@ export function PowerControls({
                 heading.current?.focus({ preventScroll: true });
               }}
             >
-              {t("Skip to illuminated city", "Aydınlanan şehre geç")}{" "}
+              {t("Skip to illuminated city")}{" "}
               <span aria-hidden="true">↗</span>
             </button>
           )}
         </div>
         <p className="reactor-note">
           {t(
-            "Conceptual · not to scale. Flow, speed and output are illustrative.",
-            "Kavramsal · ölçekli değildir. Akış, hız ve üretim temsilidir.",
-          )}
+            "Conceptual · not to scale. Flow, speed and output are illustrative.")}
           <br />
           {t(
-            "Ancillary systems omitted. Primary water stays in its own circuit.",
-            "Yardımcı sistemler gösterilmemiştir. Birincil su kendi devresinde kalır.",
-          )}
+            "Ancillary systems omitted. Primary water stays in its own circuit.")}
         </p>
         {power.stage === "ready" && (
-          <a
-            className="reactor-source"
-            href={content.source}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {t(
-              `The science, via the ${content.sourceLabel} ↗`,
-              `Bilimsel kaynak: ${content.sourceLabel} ↗`,
-            )}
-          </a>
+          <span className="reactor-source">
+            {language === "zh"
+              ? `${ZH_SOURCE_PREFIX}${content.sourceLabel}`
+              : t(
+                  `Reference: ${content.sourceLabel}`)}
+          </span>
         )}
       </div>
     </>

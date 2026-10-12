@@ -2,18 +2,18 @@
   color-scheme: dark;
   --background: #090d12;
   --ink: #ece9e1;
-  --muted: #91969a;
+  --muted: #a6abb0;
   --amber: #caaa7d;
   --blue: #8aadc8;
   --line: #bbc8d123;
   --amber-faint: #caaa7d55;
   --border-amber: #caaa7d70;
   --background-transparent: #090d1200;
-  --text-navigation: #a1a9ae;
-  --text-muted-cool: #8c9ba5;
+  --text-navigation: #b4bbc1;
+  --text-muted-cool: #a2b2bd;
   --text-warm: #cdbb9e;
   --text-warm-muted: #c5b89c;
-  --text-neutral-muted: #999d9c;
+  --text-neutral-muted: #a8acab;
   --text-emphasis: #eeede8;
   --text-label: #f0ece3;
   --coolant: #9edcff;
@@ -24,6 +24,33 @@
   --surface-label: #0b141be8;
   --border-label: #b9c9cf6b;
   --border-heat: #d8b47690;
-  --font-sans: Arial, Helvetica, sans-serif;
-  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-sans:
+    "Inter Variable", Inter, Arial, Helvetica, "Microsoft YaHei", "PingFang SC",
+    sans-serif;
+  --font-mono:
+    "JetBrains Mono Variable", "JetBrains Mono", "SFMono-Regular", Consolas,
+    "Microsoft YaHei", monospace;
+  --font-serif:
+    "Noto Serif SC Variable", "Noto Serif SC", Georgia, "Times New Roman",
+    "Songti SC", SimSun, serif;
+}
+
+/* Display headings share one type scale across all four chapters:
+   Noto Serif SC 900, matched to the STIC platform's heading system. */
+:is(h1, h2, .city-closing, .brand-tooltip-words strong) {
+  font-family: var(--font-serif);
+  font-weight: 900;
+}
+/* Noto Serif SC has no true italic; synthesized slants look broken on han
+   glyphs — the amber color already distinguishes the accented line. */
+:is(h1, h2, .city-closing) em {
+  font-style: normal;
+}
+
+/* Simplified Chinese: relax tracking for han glyphs. */
+:lang(zh-CN) :is(h1, h2) {
+  letter-spacing: 0.01em;
+}
+:lang(zh-CN) :is(.section-kicker, .reactor-scale) {
+  letter-spacing: 0.2em;
 }

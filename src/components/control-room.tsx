@@ -96,23 +96,26 @@ export function ControlRoom({
         context.stroke();
       }
       context.fillStyle = "#a6dcf3";
-      context.font = "17px monospace";
+      context.font =
+        language === "zh"
+          ? '17px "Microsoft YaHei", "PingFang SC", monospace'
+          : '17px "JetBrains Mono Variable", monospace';
       context.fillText(
-        (language === "tr"
+        (language === "zh"
           ? [
-              "NUCLUME / ISI AKTARIMI",
-              "ENERJİ / YOLCULUK",
-              "SİSTEMLER / GENEL BAKIŞ",
-              "BİRİNCİL / İKİNCİL",
-              "NUCLUME / KONTROL ODASI",
-              "İNSAN / DENETİM",
+              "电站 / 换热",
+              "能量 / 旅程",
+              "系统 / 总览",
+              "一回路 / 二回路",
+              "电站 / 主控室",
+              "人员 / 监督",
             ]
           : [
-              "NUCLUME / HEAT TRANSFER",
+              "PLANT / HEAT TRANSFER",
               "ENERGY / THE JOURNEY",
               "SYSTEMS / OVERVIEW",
               "PRIMARY / SECONDARY",
-              "NUCLUME / CONTROL ROOM",
+              "PLANT / CONTROL ROOM",
               "PEOPLE / OVERSIGHT",
             ])[tile],
         20,
@@ -127,10 +130,10 @@ export function ControlRoom({
         1,
       );
       context.fillStyle = "#6d9ab2";
-      context.font = "12px monospace";
+      context.font = '12px "Microsoft YaHei", "PingFang SC", monospace';
       context.fillText(
-        language === "tr"
-          ? "AÇIKLAYICI ŞEMA / CANLI VERİ YOK"
+        language === "zh"
+          ? "示意原理图 / 无实时数据"
           : "ILLUSTRATIVE SCHEMATIC / NO LIVE DATA",
         20,
         366,
@@ -196,10 +199,10 @@ export function ControlRoom({
           context.lineWidth = 2;
           context.strokeRect(x, 128, 80, 105);
           context.fillStyle = "#b3d4df";
-          context.font = "12px monospace";
+          context.font = '12px "Microsoft YaHei", "PingFang SC", monospace';
           context.fillText(
-            (language === "tr"
-              ? ["ISI", "HAREKET", "ELEKTRİK", "ŞEHİR"]
+            (language === "zh"
+              ? ["热", "运动", "电能", "城市"]
               : ["HEAT", "MOTION", "POWER", "CITY"])[index],
             x + 12,
             265,

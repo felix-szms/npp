@@ -20,9 +20,7 @@ export function ReactorFallback({
       viewBox="0 0 640 620"
       role="img"
       aria-label={t(
-        "Conceptual PWR cutaway: fuel rods and control rods inside a steel vessel, with primary water flowing down around the core and up through it.",
-        "Kavramsal basınçlı su reaktörü kesiti: çelik kap içindeki yakıt ve kontrol çubukları; birincil devre suyu çekirdeğin çevresinden aşağı, içinden yukarı akar.",
-      )}
+        "Conceptual PWR cutaway: fuel rods and control rods inside a steel vessel, with primary water flowing down around the core and up through it.")}
     >
       <defs>
         <linearGradient id="vessel-steel">

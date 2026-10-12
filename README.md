@@ -1,67 +1,79 @@
-# NUCLUME
+# 核电站原理 · Nuclear Power Plant Principles
 
-**From a Single Atom to an Entire City.** An interactive, conceptual science exhibition: explore uranium-235, initiate fission, discover a pressurized water reactor (PWR), and follow heat, mechanical motion and electricity to a lit city. The four chapters form one continuous journey.
+**从一个原子到一座城市。** 交互式核能科普展览：从铀-235 原子核出发，触发裂变，走进压水反应堆，再跟随热能、机械运动与电能，看一座城市被点亮。四章首尾相接，构成一条完整的叙事线。
 
-## AI-assisted development
+**From a single atom to an entire city.** An interactive science exhibition: inspect a uranium-235 nucleus, trigger fission, explore a pressurized water reactor, and follow heat, motion and electricity to a city coming alive.
 
-NUCLUME was conceived and directed by [eaabak](https://github.com/eaabak). AI coding tools were used to generate code, debug issues, and refine the implementation. The project author remains responsible for its scope, creative direction, release decisions, and published work. Validation procedures and scientific limitations are documented below.
+## 章节 Contents
 
-AI-generated reference images supplied by the project author guided the visual direction. The logo mark and favicon are implemented as SVG, and the interactive scenes use procedural geometry, textures and lighting developed through the same AI-assisted coding process. The reference images are not bundled with the application.
+| # | 章节 | 内容 |
+|---|------|------|
+| 01 | 原子 Atom | 铀-235 原子核：92 个质子 + 143 个中子，3D 可旋转、可筛选 |
+| 02 | 裂变 Fission | 拖动中子撞入原子核：U-235 + n → Ba-141 + Kr-92 + 3n + 能量（≈200 MeV） |
+| 03 | 反应堆 Reactor | 压水堆剖面：燃料棒、控制棒、冷却剂（水兼作慢化剂）、一/二回路与蒸汽发生器 |
+| 04 | 城市 City | 蒸汽 → 汽轮机 → 发电机 → 输电 → 住宅、路灯、医院次第点亮 |
 
-## Setup
+**链式反应交互演示**：裂变章完成后可打开独立演示——调节控制棒插入深度，观察次临界（链式熄灭）、临界（稳定放热）、超临界（剧烈增长）三种状态，理解反应堆为什么要把链式反应维持在临界。
 
-Use Node.js 22 or later and npm.
+科学说明弹窗内含：关键数字（每次裂变 ≈200 MeV；1 kg 铀-235 全部裂变 ≈2500 吨标准煤）、裂变产物的衰变与乏燃料放射性来源、聚变展望（结合能曲线的另一端、EAST 托卡马克）。
+
+## 特色 Features
+
+- **中英双语**：右上角随时切换；首次访问按浏览器语言自动选择（术语依据人教版高中物理课标词汇）
+- **无障碍与降级**：全键盘可操作（方向键/空格/Home）；遵循系统"减少动态"偏好；无 WebGL2 时自动切换为完整可交互的 SVG 图示
+- **自托管字体**：思源宋体（Noto Serif SC）+ Inter + JetBrains Mono，经 npm 安装打包，运行期零外部请求
+- **纯本地运行**：无环境变量、无外部服务、无外部链接，适合教室与内网环境
+- **可选音效**：Web Audio 混合 CC0 录音与程序化环境音（默认关闭）
+
+## 运行 Setup
+
+需要 Node.js 22+ 与 npm。
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open [localhost:3000](http://localhost:3000). For production, run `npm run build` followed by `npm start`. No environment variables or external services are required.
-
-## Use
-
-- Scroll through the opening, or select **Come closer**, to inspect protons and neutrons. Drag the nucleus with a mouse, or focus it and use arrow keys to rotate; Space pauses motion and Home resets the atom view. Mobile swipes keep native scrolling.
-- Continue to fission. Drag the neutron into the nucleus, tap it, or activate **Send the neutron** with Enter/Space.
-- Continue through the reactor. Inspect a fuel rod cutaway, explore neutron absorption by control rods, or follow primary coolant to the separate secondary circuit in the steam generator. Use the wheel or pinch to zoom, drag to pan, or focus the scene and use arrow keys and +/−. Home or **Reset view** restores the camera.
-- Follow the generator and transmission sequence into the city. Watch a home, streetlights and a hospital illuminate before the neighborhood opens up. Skip the sequence or explore Home, Hospital and Neighborhood views; replay restarts only the current chapter.
-- Use the chapter navigation or return controls to revisit discoveries. Progress and selections survive chapter changes during the current visit; reloading starts over. Arrow keys/Home/End move focus within chapter navigation; Enter/Space activates a chapter.
-- Motion can be paused. System reduced-motion preferences skip animated sequences while retaining controls and results. Without WebGL2, or after context loss, interactive SVG illustrations preserve the complete journey.
-- English and Turkish are available throughout. Sound is optional. Web Audio mixes recorded machinery, pipe flow and steam with procedural ambience; recordings load only after sound is enabled and the reactor is reached. Pause and hidden tabs suspend playback.
-
-## Validate
+打开 [localhost:3000](http://localhost:3000)。生产模式：
 
 ```sh
-npm run typecheck
 npm run build
+npm start
 ```
 
-## Implementation and scientific scope
+校验：`npm run typecheck`
 
-### Code organization
+## 操作 Controls
 
-- `src/components/atom-experience.tsx` connects chapter controllers and navigation. `use-scene-environment` owns browser capability/lifecycle checks; `use-scene-input` owns pointer and keyboard input. UI chrome and the science dialog have separate components.
-- Chapter hooks own timelines and interaction state. Scene components own GPU resources and rendering; `src/lib` contains conceptual model data, paths, timings and shared scene types. The Canvas remains mounted across chapter changes.
-- `src/styles/tokens.css` defines interface colors. `src/lib/scene-colors.ts` defines scene color roles, with intentional material-specific shades kept locally. `src/app/globals.css` imports styles in cascade order; preserve that order when adding rules.
+- **原子**：滚动靠近；拖拽或方向键旋转；空格暂停；Home 重置；点击按钮单看质子/中子
+- **裂变**：把中子拖入原子核，或点击 / 回车触发
+- **反应堆 / 城市**：滚轮缩放、拖拽平移；点击场景中的编号热点查看部件讲解
+- 章节导航解锁制推进；进度在本次访问内保留，刷新后重新开始
 
-### Rendering and model
+## 技术栈 Stack
 
-Next.js App Router, strict TypeScript, React Three Fiber and Three.js. One canvas uses instanced meshes, shared procedural geometries/materials, a DPR cap of 1.5 and no postprocessing. Rendering stops when hidden and settles on demand when paused or reduced motion is enabled. Inactive chapter timelines pause; later scene resources are disposed when returning to earlier chapters.
+Next.js 16（App Router）· React 19 · React Three Fiber / Three.js · 严格 TypeScript。单 Canvas 跨章节复用，实例化渲染、DPR 上限 1.5、无后处理；页面隐藏即停渲染。
 
-- Uranium-235 contains 92 protons and 143 neutrons ([NRC](https://www.nrc.gov/education-regulatory-research/the-student-corner/science-101/what-is-a-chain-reaction)). The selected fission channel, U-235 + n → Ba-141 + Kr-92 + 3n + energy, is one possible outcome ([OpenStax](https://openstax.org/books/university-physics-volume-3/pages/10-5-fission)).
-- Control rods absorb neutrons. Pressurized primary water removes core heat and transfers it to a separate secondary circuit in the steam generator; primary coolant does not enter the turbine ([NRC: PWRs](https://www.nrc.gov/reactors/power/pwrs)).
-- Secondary steam drives a turbine and coupled generator. Electricity then passes through transmission and distribution infrastructure to consumers ([EIA: generation](https://www.eia.gov/energyexplained/electricity/how-electricity-is-generated.php), [EIA: delivery](https://www.eia.gov/energyexplained/electricity/delivery-to-consumers.php)).
+```
+src/
+  app/          入口与全局样式
+  components/   章节控制器、场景组件、链式反应演示、语言组件
+  lib/          概念数据模型（核子/裂变/反应堆/发电）、中英文案、配色
+  styles/       设计令牌与各章样式
+public/audio/   CC0 音效（见 CREDITS.md）
+```
 
-This is an educational illustration, not a physical simulation or engineering model. Dimensions, timing, colors, light, particle placement, rod counts and energy output are illustrative and are not quantitatively validated. Ambient motes are atmospheric, not emitted particles. Electrons and many plant systems are omitted. One atom cannot power a city; the city represents the collective output of sustained reactions.
+## 科学边界 Scope
 
-NUCLUME is an independent educational and artistic project. It is not reactor-operation guidance, a safety analysis, an engineering design tool, or certified operator training. Do not rely on its simplified visualization for operational or safety decisions. Source citations do not imply review, approval or endorsement by the cited organizations. This description states the project's intended purpose; it does not impose additional restrictions on the MIT license.
+本应用是**教育示意，不是物理仿真或工程模型**：尺寸、时序、颜色、部件数量、功率均为示意；场景中的环境微粒是氛围效果而非辐射粒子；电子未呈现；一个原子点不亮一座城市——城市代表持续可控链式反应的集体输出。内容术语参照人教版高中物理（选择性必修第三册·原子核）与美国 NRC / EIA 的公开科普资料，引用不构成认可。本应用不用于反应堆运行指导、安全分析或操作员培训。
 
-## Assets and licensing
+## 致谢与许可 Credits & License
 
-All visual assets are generated in this repository using geometry, procedural textures, SVG and CSS. Fonts use system stacks; no external models, images or font files are bundled. The edited audio recordings in `public/audio` are self-hosted CC0 assets; [audio credits](public/audio/CREDITS.md) list their authors, source links and processing. They are illustrative sound design, not recordings of a nuclear plant. Scientific reference links provide attribution, not endorsements.
+本项目基于开源项目 [NUCLUME](https://github.com/eaabak/nuclume)（© 2026 eaabak，MIT License）二次开发，主要改动：
 
-The visual direction was developed from AI-generated reference images supplied by the project author. Those images are not included in this repository or used as rendered scene backgrounds. Any future redistribution of the reference images requires a separate review of the originating service's terms and applicable rights.
+- 全站简体中文化（中心词典 + 双语数据表，浏览器语言自动探测）
+- 排版统一：引入思源宋体/Inter/JetBrains Mono，统一各章标题字号标尺，提升对比度与小字号可读性
+- 内容扩展：新增链式反应交互演示、慢化剂说明、关键数字、裂变产物衰变与聚变展望
+- 移除全部外部链接，改为本地纯文本署名
 
-The project source code and original documentation are available under the [MIT License](LICENSE), copyright © 2026 eaabak. MIT permits commercial and noncommercial reuse, modification and redistribution while requiring preservation of the copyright and license notices. It includes warranty and liability disclaimers to the extent permitted by applicable law. Third-party recordings and dependencies retain their separate terms below.
-
-Dependencies retain their own licenses and notices. The direct runtime dependencies use MIT; TypeScript uses Apache-2.0. The lockfile also includes [caniuse-lite](https://github.com/browserslist/caniuse-lite) data by Ben Briggs under CC-BY-4.0 and optional Sharp/libvips native packages with LGPL and other bundled component licenses. Preserve applicable upstream notices and attribution, and review native-binary redistribution obligations before distributing a packaged runtime. Installed package `LICENSE`/`COPYING` files and `@img/sharp-libvips-*/README.md` list the relevant terms; the project license will not replace them.
+本项目同样以 [MIT License](LICENSE) 发布，原作者的版权与许可声明保留于 LICENSE 文件。音效来源与 CC0 许可见 [public/audio/CREDITS.md](public/audio/CREDITS.md)。

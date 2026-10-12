@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { DAUGHTERS, NEUTRON_HOME, type ReactionStage } from "@/lib/fission";
+import { ZH_REACTION_COPY } from "@/lib/zh";
+import { ChainDemoButton } from "./chain-dialog";
 import { useLanguage } from "./language-provider";
 import type { FissionController } from "./use-fission";
 
@@ -40,41 +42,6 @@ const copy: Record<
     label: "REPLAY",
     title: ["A force", "released."],
     detail: "Returning to the start of this illustration.",
-  },
-};
-
-const turkishCopy: typeof copy = {
-  ready: {
-    label: "01 / KARŞILAŞMA",
-    title: ["Küçük bir", "başlangıç."],
-    detail: "Nötronu çekirdeğe sürükleyin. Ya da başlamak için seçin.",
-  },
-  absorbing: {
-    label: "02 / YAKALANMA",
-    title: ["Bir temas", "anı."],
-    detail: "Uranyum-235 bir nötron soğurur.",
-  },
-  excited: {
-    label: "03 / UYARILMA",
-    title: ["İçinde tutmak", "artık zor."],
-    detail: "Kısa bir an için uyarılmış bir uranyum-236 çekirdeği oluşur.",
-  },
-  splitting: {
-    label: "04 / FİSYON",
-    title: ["Açığa çıkan", "bir güç."],
-    detail:
-      "Nükleer fisyonda bir çekirdek bölünür; nötronlar ve büyük miktarda enerji açığa çıkar.",
-  },
-  complete: {
-    label: "04 / FİSYON",
-    title: ["Açığa çıkan", "bir güç."],
-    detail:
-      "Nükleer fisyonda bir çekirdek bölünür; nötronlar ve büyük miktarda enerji açığa çıkar.",
-  },
-  rewinding: {
-    label: "TEKRAR",
-    title: ["Açığa çıkan", "bir güç."],
-    detail: "Bu gösterimin başlangıcına dönülüyor.",
   },
 };
 
@@ -175,14 +142,14 @@ export function ReactionNeutron({
         className={`capture-target${dragging ? " is-dragging" : ""}`}
         aria-hidden="true"
       >
-        <span>{t("RELEASE TO CAPTURE", "YAKALANMASI İÇİN BIRAKIN")}</span>
+        <span>{t("RELEASE TO CAPTURE")}</span>
       </div>
       <button
         ref={reaction.handle}
         className={`incoming-neutron${fallback ? " is-illustrated" : ""}${dragging ? " is-dragging" : ""}`}
         hidden={reaction.stage !== "ready"}
         id="incoming-neutron"
-        aria-label={t("Send neutron into nucleus", "Nötronu çekirdeğe gönder")}
+        aria-label={t("Send neutron into nucleus")}
         aria-describedby="reaction-instruction"
         onPointerDown={(event) => {
           if (event.button !== 0) return;
@@ -260,8 +227,8 @@ export function ReactionNeutron({
       >
         <span className="neutron-orb" aria-hidden="true" />
         <span className="neutron-caption">
-          {t("1 NEUTRON", "1 NÖTRON")}
-          <span>{t("DRAG / TAP", "SÜRÜKLE / DOKUN")}</span>
+          {t("1 NEUTRON")}
+          <span>{t("DRAG / TAP")}</span>
         </span>
       </button>
       <div
@@ -280,9 +247,7 @@ export function ReactionNeutron({
             {daughter.symbol}
             <small>
               {t(
-                daughter.name,
-                daughter.symbol === "Ba" ? "Baryum-141" : "Kripton-92",
-              )}
+                daughter.name)}
             </small>
           </span>
         ))}
@@ -295,9 +260,9 @@ export function ReactionNeutron({
       >
         n
         <small>
-          {t("NEUTRON", "NÖTRON")}
+          {t("NEUTRON")}
           <br />
-          {t("RELEASED", "AÇIĞA ÇIKTI")}
+          {t("RELEASED")}
         </small>
       </span>
     </>
@@ -317,7 +282,9 @@ export function ReactionControls({
 }) {
   const { language, t } = useLanguage();
   const status = useRef<HTMLDivElement>(null);
-  const details = (language === "tr" ? turkishCopy : copy)[reaction.stage];
+  const details = (language === "zh" ? ZH_REACTION_COPY : copy)[
+    reaction.stage
+  ];
   useEffect(() => {
     if (
       reaction.stage === "absorbing" ||
@@ -330,7 +297,7 @@ export function ReactionControls({
   return (
     <>
       <button className="reaction-back" onClick={onBack}>
-        <span aria-hidden="true">←</span> {t("The first atom", "İlk atom")}
+        <span aria-hidden="true">←</span> {t("The first atom")}
       </button>
       <div className="reaction-copy" data-stage={reaction.stage}>
         <div
@@ -348,23 +315,11 @@ export function ReactionControls({
             <em>{details.title[1]}</em>
           </h1>
           <p id="reaction-instruction">{details.detail}</p>
-          {reaction.stage === "complete" && (
-            <p
-              className="reaction-equation"
-              aria-label={t(
-                "Uranium 235 plus one neutron forms excited uranium 236, then barium 141, krypton 92, three neutrons and energy",
-                "Uranyum 235 ve bir nötron, uyarılmış uranyum 236 oluşturur; ardından baryum 141, kripton 92, üç nötron ve enerji açığa çıkar",
-              )}
-            >
-              <sup>235</sup>U + n <span>→</span> <sup>236</sup>U* <span>→</span>{" "}
-              <sup>141</sup>Ba + <sup>92</sup>Kr + 3n + {t("energy", "enerji")}
-            </p>
-          )}
         </div>
         <div className="reaction-actions">
           {reaction.stage === "ready" && (
             <button className="reaction-action" onClick={reaction.start}>
-              {t("Send the neutron", "Nötronu gönder")}{" "}
+              {t("Send the neutron")}{" "}
               <span aria-hidden="true">↗</span>
             </button>
           )}
@@ -374,28 +329,38 @@ export function ReactionControls({
               className="reaction-action reactor-entry"
               onClick={onContinue}
             >
-              {t("Inside the reactor", "Reaktörün içinde")}{" "}
+              {t("Inside the reactor")}{" "}
               <span aria-hidden="true">↗</span>
             </button>
           )}
           {reaction.stage === "complete" && (
             <button className="reaction-action" onClick={onReplay}>
-              {t("Replay reaction", "Tepkimeyi tekrarla")}{" "}
+              {t("Replay reaction")}{" "}
               <span aria-hidden="true">↺</span>
             </button>
           )}
+          {reaction.stage === "complete" && <ChainDemoButton />}
+        </div>
+        <div className="reaction-footer">
+          {reaction.stage === "complete" && (
+            <p
+              className="reaction-equation"
+              aria-label={t(
+                "Uranium 235 plus one neutron forms excited uranium 236, then barium 141, krypton 92, three neutrons and energy")}
+            >
+              <sup>235</sup>U + n <span>→</span> <sup>236</sup>U* <span>→</span>{" "}
+              <sup>141</sup>Ba + <sup>92</sup>Kr + 3n + {t("energy")}
+              <span className="eq-mev"> ≈ 200 MeV</span>
+            </p>
+          )}
           <p className="reaction-note">
             {t(
-              "Conceptual · not to scale",
-              "Kavramsal gösterim · ölçekli değildir",
-            )}
+              "Conceptual · not to scale")}
             {reaction.stage === "complete" && (
               <>
                 <br />
                 {t(
-                  "One possible channel. Light and trails are illustrative; most energy becomes fragment motion.",
-                  "Olası bölünme yollarından biri. Işık ve izler temsili olup enerjinin büyük bölümü parçaların hareketine dönüşür.",
-                )}
+                  "One possible channel. Light and trails are illustrative; most energy becomes fragment motion.")}
               </>
             )}
           </p>
