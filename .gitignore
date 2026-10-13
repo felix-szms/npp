@@ -9,6 +9,7 @@ next-env.d.ts
 !.env.example
 *.log
 .vercel/
+.preview
 
 # mimosa local scan artifacts
 .mimosa/
