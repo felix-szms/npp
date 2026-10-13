@@ -47,13 +47,15 @@ scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 
 ## 用户偏好与长期约束
 
-- 包管理器锁定 pnpm；`package-lock.json` 是 npm 时代遗留，是否删除待用户确认（当前与 `pnpm-lock.yaml` 并存）
+- 包管理器锁定 pnpm；npm 遗留的 `package-lock.json` 已删除（2025-10 用户确认），`pnpm-lock.yaml` 为唯一 lock
 - 保持"纯本地运行"特性：不引入外部 API、外链、环境变量依赖
 - 无障碍（全键盘操作、prefers-reduced-motion、WebGL 降级 SVG）是产品特性，改动 UI 时不得破坏
 
 ## 常见问题和预防
 
 - **沙箱文件系统根存在环境遗留的 `/pnpm-lock.yaml`**：Turbopack 自动根检测会向上搜 lock 文件并告警/干扰构建，已在 `next.config.ts` 显式固定 `turbopack.root`，勿删该配置、勿动 `/pnpm-lock.yaml`
+- **dev server 运行期间跑 `next build` 会污染 `.next/`**：生产构建覆盖根级 manifests 与 static chunks，导致浏览器端水合失败（按钮无反应、无动画）。跑过 build 后若预览异常：停服 → `rm -rf .next` → 重启 `scripts/run.sh`
+- **`next dev` 是监督进程**：只 kill 端口 worker 会被立刻重生并重新绑端口（表现为新实例 EADDRINUSE）；清理残留必须杀整棵进程树并轮询等端口释放，`scripts/run.sh` 已内置该逻辑
 - Next.js 16 相比训练数据版本有 breaking changes：写代码前先读 `node_modules/next/dist/docs/`（见顶部自动管理块）
-- 端口纪律：对外只暴露 5000（从 `.preview` 读，读不到 fallback 5000），9000 系统保留绝不 kill；预览 run 脚本已含端口残留清理
+- 端口纪律：对外只暴露 5000（从 `.preview` 读，读不到 fallback 5000），9000 系统保留绝不 kill
 - 本项目无 lint 脚本；类型校验用 `pnpm run typecheck`（`next typegen && tsc --noEmit`）
