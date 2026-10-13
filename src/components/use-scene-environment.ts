@@ -26,9 +26,9 @@ export function useSceneEnvironment() {
 
     try {
       const canvas = document.createElement("canvas");
-      const context = canvas.getContext("webgl2", {
-        failIfMajorPerformanceCaveat: true,
-      });
+      // 不设 failIfMajorPerformanceCaveat：软件渲染的 WebGL2（无 GPU 环境）仍可运行完整 3D 场景，
+      // 只有真正无 WebGL2 时才降级 SVG
+      const context = canvas.getContext("webgl2");
       setWebgl(Boolean(context));
       context?.getExtension("WEBGL_lose_context")?.loseContext();
     } catch {

@@ -53,9 +53,12 @@ scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 
 ## 常见问题和预防
 
+- **无 GPU 环境下 3D 场景不渲染/无动画**：WebGL 探测曾用 `failIfMajorPerformanceCaveat: true`，软件渲染的 WebGL2（预览面板/虚拟机/关硬件加速的浏览器）会被判 null → 永久降级 SVG 静态模式。已在 `src/components/use-scene-environment.ts` 移除该标志，软件 WebGL2 也走完整 3D 场景；仅真正无 WebGL2 才降级。勿再加回该标志
+- **前端交互问题用无头浏览器实测**：沙箱 `/root/.cache/ms-playwright` 有 chromium 二进制，在项目外（如 `/tmp/pwtest`）`pnpm add playwright-core` 并显式 `executablePath` 指向缓存二进制即可真实渲染验证。注意 Playwright 的 `locator.click` 在持续 rAF 动画 + 软件渲染下会因稳定性启发式超时，需用 `page.evaluate` 合成点击验证真实响应
 - **沙箱文件系统根存在环境遗留的 `/pnpm-lock.yaml`**：Turbopack 自动根检测会向上搜 lock 文件并告警/干扰构建，已在 `next.config.ts` 显式固定 `turbopack.root`，勿删该配置、勿动 `/pnpm-lock.yaml`
 - **dev server 运行期间跑 `next build` 会污染 `.next/`**：生产构建覆盖根级 manifests 与 static chunks，导致浏览器端水合失败（按钮无反应、无动画）。跑过 build 后若预览异常：停服 → `rm -rf .next` → 重启 `scripts/run.sh`
 - **`next dev` 是监督进程**：只 kill 端口 worker 会被立刻重生并重新绑端口（表现为新实例 EADDRINUSE）；清理残留必须杀整棵进程树并轮询等端口释放，`scripts/run.sh` 已内置该逻辑
 - Next.js 16 相比训练数据版本有 breaking changes：写代码前先读 `node_modules/next/dist/docs/`（见顶部自动管理块）
 - 端口纪律：对外只暴露 5000（从 `.preview` 读，读不到 fallback 5000），9000 系统保留绝不 kill
 - 本项目无 lint 脚本；类型校验用 `pnpm run typecheck`（`next typegen && tsc --noEmit`）
+- 开篇序列是滚动驱动的（`use-atom-opening.ts` 按滚动进度切 beat），“发送中子”等按钮在滚到对应 beat 才可用，属正常设计而非 bug
