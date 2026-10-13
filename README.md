@@ -86,7 +86,7 @@ public/audio/   CC0 音效（见 CREDITS.md）
 - 内容扩展：新增链式反应交互演示、慢化剂说明、关键数字、裂变产物衰变与聚变展望
 - 移除全部外部链接，改为本地纯文本署名
 
-本项目同样以 [MIT License](LICENSE) 发布，原作者的版权与许可声明保留于 LICENSE 文件。音效来源与 CC0 许可见 [public/audio/CREDITS.md](public/audio/CREDITS.md)。
+本项目同样以 [MIT License](LICENSE) 发布，LICENSE 中同时保留原作者与二次开发者的版权声明。音效来源与 CC0 许可见 [public/audio/CREDITS.md](public/audio/CREDITS.md)。
 
 ---
 
@@ -172,4 +172,4 @@ This project is derived from the open-source [NUCLUME](https://github.com/eaabak
 - Content additions: the interactive chain-reaction demo, the moderator explanation, key numbers, fission-product decay and the fusion outlook
 - All external links removed in favor of local plain-text attribution
 
-This project is likewise released under the [MIT License](LICENSE); the original author's copyright and license notice are preserved in the LICENSE file. Sound sources and CC0 licenses: [public/audio/CREDITS.md](public/audio/CREDITS.md).
+This project is likewise released under the [MIT License](LICENSE), which carries the copyright notices of both the original author and this adaptation. Sound sources and CC0 licenses: [public/audio/CREDITS.md](public/audio/CREDITS.md).
