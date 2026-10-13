@@ -40,7 +40,7 @@ scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 
 ## 运行与预览
 
-- 预览：`bash scripts/run.sh` 起 `next dev`，端口从 `.preview` 读取（固定 5000），绑定 `0.0.0.0`；依赖安装走 `scripts/build.sh`（`pnpm install --frozen-lockfile`）
+- 预览：`bash scripts/run.sh` 起 `next start`（**生产模式**），端口从 `.preview` 读取（固定 5000），绑定 `0.0.0.0`；依赖安装 + 生产构建走 `scripts/build.sh`（`pnpm install --frozen-lockfile`）
 - 部署：`.cozeproj/scripts/deploy_build.sh`（`pnpm install && pnpm run build`）→ `deploy_run.sh`（`next start --port 5000`）
 - 交付验收一律走 `test_run`（静态检查 + 探活 + 冒烟 curl）；不用 exec_shell 跑 lint/build/curl 自验证
 - 调试日志：浏览器 console 看 `/app/work/logs/bypass/console.log`，服务端看 `dev.log`
@@ -53,6 +53,7 @@ scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 
 ## 常见问题和预防
 
+- **预览必须用 `next start`（生产模式），不能用 `next dev`**：平台预览代理链路（dev.coze.site 透传）下，`next dev` 的 React flight 流式水合存在竞态——`app-index.js` 中 `hydrate()` 的 `await initialServerResponse` 永不返回，`hydrateRoot` 永不执行，表现为：页面只有 SSR 静态壳（LOGO/章节按钮/MobileContent 可见），但原子区域黑屏、所有按钮/滚动切章无响应，且**无任何报错**（console 仅 dev overlay commit，无应用树 commit；`[scene-diag]` 也不出现）。切 `next start` 后完全正常。改预览脚本/起服务时务必走 `scripts/run.sh`（next start），勿改回 next dev
 - **无 GPU 环境下 3D 场景不渲染/无动画**：WebGL 探测曾用 `failIfMajorPerformanceCaveat: true`，软件渲染的 WebGL2（预览面板/虚拟机/关硬件加速的浏览器）会被判 null → 永久降级 SVG 静态模式。已在 `src/components/use-scene-environment.ts` 移除该标志，软件 WebGL2 也走完整 3D 场景；仅真正无 WebGL2 才降级。勿再加回该标志
 - **前端交互问题用无头浏览器实测**：沙箱 `/root/.cache/ms-playwright` 有 chromium 二进制，在项目外（如 `/tmp/pwtest`）`pnpm add playwright-core` 并显式 `executablePath` 指向缓存二进制即可真实渲染验证。注意 Playwright 的 `locator.click` 在持续 rAF 动画 + 软件渲染下会因稳定性启发式超时，需用 `page.evaluate` 合成点击验证真实响应
 - **沙箱文件系统根存在环境遗留的 `/pnpm-lock.yaml`**：Turbopack 自动根检测会向上搜 lock 文件并告警/干扰构建，已在 `next.config.ts` 显式固定 `turbopack.root`，勿删该配置、勿动 `/pnpm-lock.yaml`
