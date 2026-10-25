@@ -18,7 +18,6 @@ import {
   type JourneyTransition,
 } from "./use-journey";
 import { useLanguage } from "./language-provider";
-import { useJourneyAudio } from "./journey-audio";
 import { useAtomOpening } from "./use-atom-opening";
 import { AtomOpening } from "./atom-opening";
 import {
@@ -69,20 +68,6 @@ export function AtomExperience() {
     visible && !aboutOpen,
     reducedMotion || webgl === false,
   );
-  const audio = useJourneyAudio({
-    phase: journey.phase,
-    reactionStage: reaction.stage,
-    reactorTime: reactor.elapsed,
-    reactorSelected: reactor.selected,
-    reactorInspection: reactor.inspection,
-    powerTime: power.sceneTime,
-    powerTransfer: power.transfer,
-    powerSelected: power.selected,
-    roomOpen: power.roomOpen,
-    playing,
-    visible: visible && !aboutOpen,
-    reducedMotion,
-  });
   const input = useSceneInput({
     phase: journey.phase,
     disabled: webgl === false || journey.busy,
@@ -214,7 +199,6 @@ export function AtomExperience() {
         available={available}
         onNavigate={navigate}
         onHome={() => (reacting ? navigate(0) : resetView())}
-        audio={audio}
       />
       <section
         className="chapter"

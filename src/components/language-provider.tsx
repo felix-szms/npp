@@ -21,8 +21,8 @@ type LanguageContextValue = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 const TITLES: Record<Language, string> = {
-  en: "Nuclear Power Plant Principles · 核电站原理",
-  zh: "核电站原理 · Nuclear Power Plant Principles",
+  en: "Nuclear Power Plant Principles · Shenzhen Middle School",
+  zh: "核电站原理 · 深圳中学",
 };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {

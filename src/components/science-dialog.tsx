@@ -3,26 +3,6 @@
 import { useEffect, useRef } from "react";
 import { useLanguage } from "./language-provider";
 
-function ExternalLinkArrow() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M6 18 18 6M6 6h12v12"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 export function ScienceDialog({
   open,
   onClose,
@@ -82,6 +62,10 @@ export function ScienceDialog({
         {t(
           "An independent educational and artistic project. This simplified experience is not engineering guidance, a safety analysis or reactor-operator training. Source links do not imply endorsement by the cited organizations.")}
       </p>
+      <p className="science-note sz-brand">
+        {t(
+          "Shenzhen Middle School customized edition · Under the flame tree, since 1947 — the pursuit of excellence, the courage to be first.")}
+      </p>
       <h3 className="science-subheading">
         {t("By the numbers")}
       </h3>
@@ -109,10 +93,6 @@ export function ScienceDialog({
         {t(
           "References: U.S. NRC (chain reaction, PWR circuits) · U.S. EIA (electricity generation). Citation does not imply endorsement.")}
       </p>
-      <a href="/audio/CREDITS.md" target="_blank" rel="noreferrer">
-        {t("Sound sources & CC0 licenses")}{" "}
-        <ExternalLinkArrow />
-      </a>
     </dialog>
   );
 }

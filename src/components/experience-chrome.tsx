@@ -43,13 +43,11 @@ export function ExperienceHeader({
   available,
   onNavigate,
   onHome,
-  audio,
 }: {
   journey: JourneyController;
   available: boolean[];
   onNavigate: (phase: JourneyPhase) => void;
   onHome: () => void;
-  audio: { enabled: boolean; available: boolean; toggle: () => void };
 }) {
   const { t, language } = useLanguage();
   return (
@@ -70,7 +68,9 @@ export function ExperienceHeader({
               {language === "zh" ? "核电站原理" : "Nuclear Power Plant"}
             </span>
             <span className="wordmark-alt">
-              {language === "zh" ? "Nuclear Power Plant" : "核电站原理"}
+              {language === "zh"
+                ? "深圳中学 · EST. 1947"
+                : "SHENZHEN MIDDLE SCHOOL · EST. 1947"}
             </span>
           </span>
         </a>
@@ -81,44 +81,6 @@ export function ExperienceHeader({
         onNavigate={onNavigate}
       />
       <LanguageSwitcher />
-      <button
-        type="button"
-        className="sound-control"
-        aria-label={
-          audio.enabled
-            ? t("Turn sound design off")
-            : t("Turn sound design on")
-        }
-        title={t("Optional sound design")}
-        aria-pressed={audio.enabled}
-        disabled={!audio.available}
-        onClick={audio.toggle}
-      >
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="m11 5-5 4H3v6h3l5 4V5Z"
-            stroke="currentColor"
-            strokeWidth="1.3"
-            strokeLinejoin="round"
-          />
-          <path
-            d={
-              audio.enabled
-                ? "M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"
-                : "m16 9 6 6m0-6-6 6"
-            }
-            stroke="currentColor"
-            strokeWidth="1.3"
-            strokeLinecap="round"
-          />
-        </svg>
-      </button>
     </header>
   );
 }

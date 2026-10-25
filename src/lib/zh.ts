@@ -58,9 +58,6 @@ export const ZH_TEXT: Record<string, string> = {
 
   // experience-chrome
   "Nuclear Power Plant home": "核电站原理 · 首页",
-  "Turn sound design off": "关闭声音设计",
-  "Turn sound design on": "开启声音设计",
-  "Optional sound design": "可选的声音设计",
   "Pause city motion": "暂停城市运动",
   "Resume city motion": "恢复城市运动",
   "Pause reactor motion": "暂停反应堆运动",
@@ -275,7 +272,8 @@ export const ZH_TEXT: Record<string, string> = {
     "这是一个概念模型，不是物理仿真。颜色用于区分粒子种类；位置、大小、间距与运动均为示意。环境中的悬浮微粒是氛围效果，并非放射出的粒子。电子不在本视图范围内。",
   "An independent educational and artistic project. This simplified experience is not engineering guidance, a safety analysis or reactor-operator training. Source links do not imply endorsement by the cited organizations.":
     "这是一个独立的教育与艺术项目。本简化体验不是工程指导、安全分析或反应堆操作员培训；资料链接也不代表被引用机构的认可或背书。",
-  "Sound sources & CC0 licenses": "声音来源与 CC0 许可",
+  "Shenzhen Middle School customized edition · Under the flame tree, since 1947 — the pursuit of excellence, the courage to be first.":
+    "深圳中学定制版 · 凤凰木下，建校于 1947 —— 追求卓越，敢为人先。",
 };
 
 // --- Chapter labels ---------------------------------------------------------

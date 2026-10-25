@@ -1,10 +1,10 @@
 export const NUCLEUS_COLORS = {
-  proton: "#bda889",
+  proton: "#b57a55",
   neutron: "#647e93",
   incomingNeutron: "#c6ddea",
   inactive: "#354250",
   protonEmission: "#8b3d10",
-  atmosphereWarm: "#dfba82",
+  atmosphereWarm: "#dc9a68",
   atmosphereCool: "#638ba1",
 } as const;
 

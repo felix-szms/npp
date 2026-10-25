@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## 项目概述
 
-核电站原理交互科普展（Nuclear Power Plant Principles）：从铀-235 原子 → 裂变 → 压水反应堆 → 城市供电的四章叙事线，含链式反应临界状态演示。中英双语、纯本地运行（无环境变量/无外部服务/无外链）、教育示意而非物理仿真。Fork 自 eaabak 的项目并做了中文化改造，MIT 双版权。
+核电站原理交互科普展（Nuclear Power Plant Principles）：从铀-235 原子 → 裂变 → 压水反应堆 → 城市供电的四章叙事线，含链式反应临界状态演示。中英双语、纯本地运行（无环境变量/无外部服务/无外链）、教育示意而非物理仿真。Fork 自 eaabak 的项目并做了中文化改造，MIT 双版权。**深圳中学定制版**：凤凰橙 + 深中蓝配色、品牌徽章与署名（设计规范见 DESIGN.md）。音效系统已于 2026-10 按用户要求整体移除。
 
 ## 技术栈
 
@@ -25,12 +25,13 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ```
 src/app/          入口（layout.tsx、page.tsx、globals.css）
 src/components/   章节控制器、3D 场景组件、链式反应演示、语言切换
-src/lib/          概念数据模型（核子/裂变/反应堆/发电）、中英文案、配色
+src/lib/          概念数据模型（核子/裂变/反应堆/发电）、中英文案、配色（scene-colors.ts 为 3D 材质色，tokens.css 为 UI 令牌）
 src/styles/       设计令牌与各章样式
-public/audio/     CC0 音效（默认关闭）
 scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 .cozeproj/scripts/ 部署脚本（deploy_build.sh / deploy_run.sh，对应 .coze [deploy]）
 ```
+
+音效已整体移除：journey-audio.tsx / journey-sound.ts / public/audio/ 已删，勿再引入 AudioContext 相关代码。
 
 ## 关键入口 / 核心模块
 
@@ -52,6 +53,9 @@ scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 - 无障碍（全键盘操作、prefers-reduced-motion、WebGL 降级 SVG）是产品特性，改动 UI 时不得破坏
 
 ## 常见问题和预防
+
+- **链式反应控制棒深度**：`chain-dialog.tsx` 的 `ROD_AREA` 是"控制棒可达深度占容器高度的比例"（现 0.92），渲染与中子吸收判定共用该常量，改一处即可；曾因 0.44 导致"滑块 100% 但图示只插一半"
+- **无头浏览器验证裂变动画慢**：软件渲染下 rAF 帧率低，`use-fission` 每帧 elapsed 上限 0.1s → 时间轴被拉长数倍；测试需加 `--disable-background-timer-throttling` 并耐心等待 stage complete（链式反应按钮在 `reaction.stage === "complete"` 才渲染）
 
 - **预览必须用 `next start`（生产模式），不能用 `next dev`**：平台预览代理链路（dev.coze.site 透传）下，`next dev` 的 React flight 流式水合存在竞态——`app-index.js` 中 `hydrate()` 的 `await initialServerResponse` 永不返回，`hydrateRoot` 永不执行，表现为：页面只有 SSR 静态壳（LOGO/章节按钮/MobileContent 可见），但原子区域黑屏、所有按钮/滚动切章无响应，且**无任何报错**（console 仅 dev overlay commit，无应用树 commit；`[scene-diag]` 也不出现）。切 `next start` 后完全正常。改预览脚本/起服务时务必走 `scripts/run.sh`（next start），勿改回 next dev
 - **无 GPU 环境下 3D 场景不渲染/无动画**：WebGL 探测曾用 `failIfMajorPerformanceCaveat: true`，软件渲染的 WebGL2（预览面板/虚拟机/关硬件加速的浏览器）会被判 null → 永久降级 SVG 静态模式。已在 `src/components/use-scene-environment.ts` 移除该标志，软件 WebGL2 也走完整 3D 场景；仅真正无 WebGL2 才降级。勿再加回该标志

@@ -15,7 +15,7 @@ import { useLanguage } from "./language-provider";
 const W = 640;
 const H = 400;
 const VESSEL = { x: 78, y: 58, w: 484, h: 300 };
-const ROD_AREA = 0.44; // fraction of vessel height the rods can reach
+const ROD_AREA = 0.92; // fraction of vessel height the rods can reach (full insertion ≈ core depth)
 const NUCLEUS_R = 7;
 const NEUTRON_SPEED = 150; // px/s
 const FRAGMENT_SPEED = 90;
@@ -302,14 +302,14 @@ function ChainDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
       for (const nucleus of s.nuclei) {
         if (nucleus.split) {
           if (nucleus.flash > 0) {
-            ctx.strokeStyle = `rgba(240, 212, 164, ${nucleus.flash * 0.8})`;
+            ctx.strokeStyle = `rgba(224, 150, 100, ${nucleus.flash * 0.8})`;
             ctx.lineWidth = 1.5;
             ctx.beginPath();
             ctx.arc(nucleus.x, nucleus.y, NUCLEUS_R + 6 * (1 - nucleus.flash), 0, Math.PI * 2);
             ctx.stroke();
           }
         } else {
-          ctx.fillStyle = "#caaa7d";
+          ctx.fillStyle = "#c9805a";
           ctx.beginPath();
           ctx.arc(nucleus.x, nucleus.y, NUCLEUS_R, 0, Math.PI * 2);
           ctx.fill();
@@ -323,7 +323,7 @@ function ChainDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
 
       // fragments
       for (const f of s.fragments) {
-        ctx.fillStyle = `rgba(240, 212, 164, ${f.life * 0.9})`;
+        ctx.fillStyle = `rgba(224, 150, 100, ${f.life * 0.9})`;
         ctx.beginPath();
         ctx.arc(f.x, f.y, 3.5, 0, Math.PI * 2);
         ctx.fill();
