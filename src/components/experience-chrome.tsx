@@ -68,9 +68,7 @@ export function ExperienceHeader({
               {language === "zh" ? "核电站原理" : "Nuclear Power Plant"}
             </span>
             <span className="wordmark-alt">
-              {language === "zh"
-                ? "深圳中学 · EST. 1947"
-                : "SHENZHEN MIDDLE SCHOOL · EST. 1947"}
+              {language === "zh" ? "深圳中学" : "SHENZHEN MIDDLE SCHOOL"}
             </span>
           </span>
         </a>

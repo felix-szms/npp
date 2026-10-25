@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## 项目概述
 
-核电站原理交互科普展（Nuclear Power Plant Principles）：从铀-235 原子 → 裂变 → 压水反应堆 → 城市供电的四章叙事线，含链式反应临界状态演示。中英双语、纯本地运行（无环境变量/无外部服务/无外链）、教育示意而非物理仿真。Fork 自 eaabak 的项目并做了中文化改造，MIT 双版权。**深圳中学定制版**：凤凰橙 + 深中蓝配色、品牌徽章与署名（设计规范见 DESIGN.md）。音效系统已于 2026-10 按用户要求整体移除。
+核电站原理交互科普展（Nuclear Power Plant Principles）：从铀-235 原子 → 裂变 → 压水反应堆 → 城市供电的四章叙事线，含链式反应临界状态演示。中英双语、纯本地运行（无环境变量/无外部服务/无外链）、教育示意而非物理仿真。Fork 自 eaabak 的项目并做了中文化改造，MIT 双版权。**深圳中学定制版（2026-10 用户要求简化）**：仅在 wordmark 副标与页面 title 出现校名（"SHENZHEN MIDDLE SCHOOL" / "深圳中学"），配色/徽章/署名保持上游原版；早期"凤凰橙+深中蓝+EST.1947 署名"方案已按用户要求回退（设计规范见 DESIGN.md）。音效系统已于 2026-10 按用户要求整体移除。
 
 ## 技术栈
 
@@ -67,3 +67,4 @@ scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 - 端口纪律：对外只暴露 5000（从 `.preview` 读，读不到 fallback 5000），9000 系统保留绝不 kill
 - 本项目无 lint 脚本；类型校验用 `pnpm run typecheck`（`next typegen && tsc --noEmit`）
 - 开篇序列是滚动驱动的（`use-atom-opening.ts` 按滚动进度切 beat），“发送中子”等按钮在滚到对应 beat 才可用，属正常设计而非 bug
+- **`pkill -f "next start"` 会自杀 shell**：pkill -f 匹配整条命令行，exec_shell 的 bash 进程命令行里含 "next start" 字样即被杀，后续命令静默不执行（表现为输出被吞、构建没跑）。清理服务进程用不自匹配的模式：`pkill -f 'next-serv[e]r'`，再用 `fuser -k 5000/tcp` + `ss` 确认端口释放

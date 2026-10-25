@@ -62,10 +62,6 @@ export function ScienceDialog({
         {t(
           "An independent educational and artistic project. This simplified experience is not engineering guidance, a safety analysis or reactor-operator training. Source links do not imply endorsement by the cited organizations.")}
       </p>
-      <p className="science-note sz-brand">
-        {t(
-          "Shenzhen Middle School customized edition · Under the flame tree, since 1947 — the pursuit of excellence, the courage to be first.")}
-      </p>
       <h3 className="science-subheading">
         {t("By the numbers")}
       </h3>

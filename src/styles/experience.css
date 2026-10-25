@@ -171,10 +171,7 @@ button:disabled {
   width: 27px;
   height: 27px;
   flex-shrink: 0;
-  padding: 3px;
   color: var(--amber);
-  border: 1px solid var(--border-amber);
-  border-radius: 50%;
 }
 .journey-navigation ol {
   display: flex;
@@ -577,9 +574,6 @@ h1 > em {
   padding-top: 20px;
   font-size: 12px;
   color: #adbac2;
-}
-.about-dialog p.science-note.sz-brand {
-  color: var(--amber);
 }
 .about-dialog > a {
   display: inline-flex;
