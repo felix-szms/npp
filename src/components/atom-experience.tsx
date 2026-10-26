@@ -26,6 +26,8 @@ import {
   AtomReticle,
 } from "./experience-chrome";
 import { ScienceDialog } from "./science-dialog";
+import { HistoryDialog } from "./history-dialog";
+import { FrontierDialog } from "./frontier-dialog";
 import { SceneBoundary } from "./scene-boundary";
 import { useSceneEnvironment } from "./use-scene-environment";
 import { useSceneInput } from "./use-scene-input";
@@ -40,6 +42,8 @@ export function AtomExperience() {
     useSceneEnvironment();
   const [resetKey, setResetKey] = useState(0);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [frontierOpen, setFrontierOpen] = useState(false);
   const journey = useJourney(
     visible && !aboutOpen,
     reducedMotion || webgl === false,
@@ -199,6 +203,8 @@ export function AtomExperience() {
         available={available}
         onNavigate={navigate}
         onHome={() => (reacting ? navigate(0) : resetView())}
+        onHistory={() => setHistoryOpen(true)}
+        onFrontier={() => setFrontierOpen(true)}
       />
       <section
         className="chapter"
@@ -422,6 +428,8 @@ export function AtomExperience() {
         />
       </section>
       <ScienceDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />
+      <HistoryDialog open={historyOpen} onClose={() => setHistoryOpen(false)} />
+      <FrontierDialog open={frontierOpen} onClose={() => setFrontierOpen(false)} />
     </main>
   );
 }

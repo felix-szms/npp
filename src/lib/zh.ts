@@ -470,6 +470,24 @@ export const ZH_CITY_PLACES = {
     description:
       "电能支撑着照明、医疗设备和基本公共服务。这所医院代表着一个社区所依赖的公共基础设施。",
   },
+  // history dialog
+  "Close nuclear history": "关闭核电历史",
+  "Nuclear Power Plant / History": "核电站原理 / 历史",
+  "From pile to city.": "从第一个反应堆，",
+  "Eighty years in one line.": "到一座城市——八十年一条线。",
+  "Nuclear power history timeline": "核电发展历程时间线",
+  // frontier dialog
+  "Close frontier nuclear applications": "关闭前沿核能应用",
+  "Nuclear Power Plant / Frontier": "核电站原理 / 前沿",
+  "Where this is heading.": "核能正驶向何方？",
+  "Smaller, hotter, cleaner.": "更小、更热、更清洁。",
+  "The pressurized water reactor in chapter three is today's workhorse. These are the directions it is evolving toward.":
+    "第三章的压水反应堆是今天的绝对主力，而这里是它正在奔赴的方向。",
+  "Frontier nuclear applications": "前沿核能应用",
+  // fusion demo
+  "Fusion demonstration diagram": "核聚变演示示意图",
+  "Replay fusion": "重放聚变",
+  "Start fusion →": "启动聚变 →",
 };
 
 export const ZH_SOURCE_PREFIX = "科学参考：";

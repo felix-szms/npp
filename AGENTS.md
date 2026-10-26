@@ -25,11 +25,16 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ```
 src/app/          入口（layout.tsx、page.tsx、globals.css）
 src/components/   章节控制器、3D 场景组件、链式反应演示、语言切换
-src/lib/          概念数据模型（核子/裂变/反应堆/发电）、中英文案、配色（scene-colors.ts 为 3D 材质色，tokens.css 为 UI 令牌）
-src/styles/       设计令牌与各章样式
+src/lib/          概念数据模型（核子/裂变/反应堆/发电）、中英文案、历史时间线与前沿卡片数据（history.ts / frontier.ts）、配色（scene-colors.ts 为 3D 材质色，tokens.css 为 UI 令牌）
+src/styles/       设计令牌与各章样式（时间线/前沿卡片样式在 experience.css 末段）
 scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 .cozeproj/scripts/ 部署脚本（deploy_build.sh / deploy_run.sh，对应 .coze [deploy]）
 ```
+
+2026-10 新增内容模块（按用户要求调研后实施）：
+- **核电简史时间线**（`history-dialog.tsx` + `lib/history.ts`）：Header 时钟按钮入口，四代区段导览 + 15 条里程碑（世界/中国/深圳分区徽章，深圳 1994 大亚湾条目高亮）
+- **前沿核能卡片**（`frontier-dialog.tsx` + `lib/frontier.ts`）：Header 聚变图标按钮入口，6 张卡片（SMR/高温气冷堆/钠冷快堆/熔盐堆/可控聚变/非电应用），聚变卡内嵌 2D 演示
+- **聚变演示**（`fusion-demo.tsx`）：canvas 状态机 D+T→He-4+n（17.6 MeV），3.4s 时间轴，prefers-reduced-motion 直接呈现结果帧；canvas font 不支持 CSS var()，须用字面字体栈
 
 音效已整体移除：journey-audio.tsx / journey-sound.ts / public/audio/ 已删，勿再引入 AudioContext 相关代码。
 
