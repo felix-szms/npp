@@ -272,6 +272,35 @@ export const ZH_TEXT: Record<string, string> = {
     "这是一个概念模型，不是物理仿真。颜色用于区分粒子种类；位置、大小、间距与运动均为示意。环境中的悬浮微粒是氛围效果，并非放射出的粒子。电子不在本视图范围内。",
   "An independent educational and artistic project. This simplified experience is not engineering guidance, a safety analysis or reactor-operator training. Source links do not imply endorsement by the cited organizations.":
     "这是一个独立的教育与艺术项目。本简化体验不是工程指导、安全分析或反应堆操作员培训；资料链接也不代表被引用机构的认可或背书。",
+  // site pages (history / frontier)
+  "Nuclear Power Plant Principles": "核电站原理",
+  "History": "历史",
+  "Frontier": "前沿",
+  "Page navigation": "页面导航",
+  "Eighty years,": "八十年，",
+  "from pile to city.": "从第一个反应堆，到一座城市。",
+  "From a secret pile of graphite in Chicago to the largest nuclear program on Earth — follow the milestones that made nuclear power real, and see where Shenzhen appears on the line.":
+    "从芝加哥一间秘密的石墨反应堆，到全球规模最大的核电计划——沿着让核电成为现实的里程碑走一遍，也看看深圳出现在这条线上的位置。",
+  "Four generations of reactors": "四代反应堆",
+  "Filter milestones by region": "按地区筛选里程碑",
+  "World": "世界",
+  "China": "中国",
+  "Shenzhen": "深圳",
+  "Show all": "显示全部",
+  "No milestones match the filters.": "当前筛选没有匹配的里程碑。",
+  "Continue to the frontier →": "前往前沿核能 →",
+  "Back to the interactive journey": "返回互动体验",
+  "Smaller, hotter,": "更小、更热、",
+  "cleaner.": "更清洁。",
+  "The pressurized water reactor of chapter three is today's workhorse. These are the directions it is heading — pick a card to open it up, and fire the fusion demo.":
+    "第三章的压水反应堆是今天的绝对主力，这里是它正在奔赴的方向——点开卡片看详情，也可以亲手点燃聚变演示。",
+  "Filter directions by category": "按类别筛选前沿方向",
+  "All directions": "全部方向",
+  "Advanced fission": "先进裂变",
+  "Small modular reactors": "小型模块化反应堆",
+  "Fusion": "聚变",
+  "Beyond electricity": "非电应用",
+  "← Back to the history": "← 返回核电简史",
 };
 
 // --- Chapter labels ---------------------------------------------------------

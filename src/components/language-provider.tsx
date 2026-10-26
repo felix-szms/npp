@@ -11,22 +11,27 @@ import {
 } from "react";
 import { ZH_TEXT } from "@/lib/zh";
 
-type Language = "en" | "zh";
-type LanguageContextValue = {
-  language: Language;
-  setLanguage: (language: Language) => void;
-  t: (english: string) => string;
-};
+export type Language = "en" | "zh";
 
-const LanguageContext = createContext<LanguageContextValue | null>(null);
-
-const TITLES: Record<Language, string> = {
+const DEFAULT_TITLES: Record<Language, string> = {
   en: "Nuclear Power Plant Principles · Shenzhen Middle School",
   zh: "核电站原理 · 深圳中学",
 };
 
+type LanguageContextValue = {
+  language: Language;
+  setLanguage: (language: Language) => void;
+  t: (english: string) => string;
+  setPageTitles: (titles: Record<Language, string>) => void;
+};
+
+const LanguageContext = createContext<LanguageContextValue | null>(null);
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, updateLanguage] = useState<Language>("en");
+  const [pageTitles, setPageTitles] = useState<Record<Language, string>>(
+    DEFAULT_TITLES,
+  );
 
   useEffect(() => {
     try {
@@ -46,12 +51,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     // Next.js metadata re-asserts its own <title> right after hydration;
     // re-apply ours one tick later so the localized title sticks.
     const apply = () => {
-      document.title = TITLES[language];
+      document.title = pageTitles[language];
     };
     apply();
     const id = window.setTimeout(apply, 250);
     return () => window.clearTimeout(id);
-  }, [language]);
+  }, [language, pageTitles]);
 
   const setLanguage = useCallback((next: Language) => {
     updateLanguage(next);
@@ -65,7 +70,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     [language],
   );
   const value = useMemo(
-    () => ({ language, setLanguage, t }),
+    () => ({ language, setLanguage, t, setPageTitles }),
     [language, setLanguage, t],
   );
 
@@ -73,7 +78,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     <LanguageContext.Provider value={value}>
       {/* Sole owner of the document title (layout metadata declares none):
           rendering it keeps React's hoistable in sync with the language. */}
-      <title>{TITLES[language]}</title>
+      <title>{pageTitles[language]}</title>
       {children}
     </LanguageContext.Provider>
   );
@@ -83,6 +88,13 @@ export function useLanguage() {
   const context = useContext(LanguageContext);
   if (!context) throw new Error("LanguageProvider is missing");
   return context;
+}
+
+export function usePageTitles(titles: Record<Language, string>) {
+  const { setPageTitles } = useLanguage();
+  useEffect(() => {
+    setPageTitles(titles);
+  }, [titles.en, titles.zh, setPageTitles]);
 }
 
 export function LanguageSwitcher() {

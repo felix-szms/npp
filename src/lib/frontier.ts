@@ -3,6 +3,7 @@
 export type FrontierCard = {
   id: string;
   icon: "smr" | "htgr" | "sfr" | "msr" | "fusion" | "multi";
+  category: "fission" | "smr" | "fusion" | "nonElectric";
   titleEn: string;
   titleZh: string;
   pointsEn: string[];
@@ -15,6 +16,7 @@ export const FRONTIER_CARDS: FrontierCard[] = [
   {
     id: "smr",
     icon: "smr",
+    category: "smr",
     titleEn: "Small Modular Reactors",
     titleZh: "小型模块化反应堆（SMR）",
     pointsEn: [
@@ -33,6 +35,7 @@ export const FRONTIER_CARDS: FrontierCard[] = [
   {
     id: "htgr",
     icon: "htgr",
+    category: "fission",
     titleEn: "High-Temperature Gas-cooled Reactor",
     titleZh: "高温气冷堆",
     pointsEn: [
@@ -51,6 +54,7 @@ export const FRONTIER_CARDS: FrontierCard[] = [
   {
     id: "sfr",
     icon: "sfr",
+    category: "fission",
     titleEn: "Sodium-cooled Fast Reactor",
     titleZh: "钠冷快堆",
     pointsEn: [
@@ -69,6 +73,7 @@ export const FRONTIER_CARDS: FrontierCard[] = [
   {
     id: "msr",
     icon: "msr",
+    category: "fission",
     titleEn: "Molten Salt Reactor",
     titleZh: "熔盐堆",
     pointsEn: [
@@ -87,6 +92,7 @@ export const FRONTIER_CARDS: FrontierCard[] = [
   {
     id: "fusion",
     icon: "fusion",
+    category: "fusion",
     titleEn: "Controlled Fusion",
     titleZh: "可控核聚变",
     pointsEn: [
@@ -105,6 +111,7 @@ export const FRONTIER_CARDS: FrontierCard[] = [
   {
     id: "multi",
     icon: "multi",
+    category: "nonElectric",
     titleEn: "Beyond Electricity",
     titleZh: "核能非电应用",
     pointsEn: [

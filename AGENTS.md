@@ -24,6 +24,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ```
 src/app/          入口（layout.tsx、page.tsx、globals.css）
+src/app/history/  核电简史互动页（四代筛选 + 世界/中国/深圳区域筛选）
+src/app/frontier/ 前沿核能互动页（类别筛选 + 卡片展开 + 聚变演示）
 src/components/   章节控制器、3D 场景组件、链式反应演示、语言切换
 src/lib/          概念数据模型（核子/裂变/反应堆/发电）、中英文案、历史时间线与前沿卡片数据（history.ts / frontier.ts）、配色（scene-colors.ts 为 3D 材质色，tokens.css 为 UI 令牌）
 src/styles/       设计令牌与各章样式（时间线/前沿卡片样式在 experience.css 末段）
@@ -43,6 +45,9 @@ scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 - 唯一页面 `src/app/page.tsx`；单 Canvas 跨章节复用（实例化渲染、DPR 上限 1.5）
 - `next.config.ts`：显式设置 `turbopack.root = 项目根`（见"常见问题"）
 - `.coze`：sub_id `59aa51d2`，project_type `web`，单层结构（`[subprojects].path = ["."]`）
+
+- LanguageProvider 挂在 root layout（全路由共享语言态）；页面标题经 usePageTitles 注册（默认 TITLES 是主页）。新增页面文案：英文写 JSX/data，中文加 `src/lib/zh.ts` 的 ZH_TEXT；数据文件（history.ts/frontier.ts）自带 en/zh 双字段按 language 取
+- **向 zh.ts 的 ZH_TEXT 手工加 key 时**：用编辑器插到第 275 行 `};`（ZH_TEXT 闭合）之前，勿用脚本按 `rfind("};")` 定位——那会命中 ZH_CITY_PLACES 等后续对象；改完用无头浏览器切中文验证 t() 内容（曾因 key 插错对象导致整站 t() 回退英文且无任何报错）
 
 ## 运行与预览
 

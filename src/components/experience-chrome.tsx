@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 import { ISOTOPE } from "@/lib/nucleus";
 import { JourneyNavigation } from "./journey-navigation";
 import { LanguageSwitcher, useLanguage } from "./language-provider";
@@ -43,15 +44,11 @@ export function ExperienceHeader({
   available,
   onNavigate,
   onHome,
-  onHistory,
-  onFrontier,
 }: {
   journey: JourneyController;
   available: boolean[];
   onNavigate: (phase: JourneyPhase) => void;
   onHome: () => void;
-  onHistory: () => void;
-  onFrontier: () => void;
 }) {
   const { t, language } = useLanguage();
   return (
@@ -83,31 +80,27 @@ export function ExperienceHeader({
         onNavigate={onNavigate}
       />
       <div className="header-tools">
-        <button
-          type="button"
+        <Link
+          href="/history"
           className="header-toggle"
           aria-label={t("Nuclear power history timeline")}
-          aria-haspopup="dialog"
-          onClick={onHistory}
         >
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
             <circle cx="7.5" cy="7.5" r="6" />
             <path d="M7.5 4v3.8l2.6 1.6" />
           </svg>
-        </button>
-        <button
-          type="button"
+        </Link>
+        <Link
+          href="/frontier"
           className="header-toggle"
           aria-label={t("Frontier nuclear applications")}
-          aria-haspopup="dialog"
-          onClick={onFrontier}
         >
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
             <circle cx="5.6" cy="8.2" r="2" />
             <circle cx="10.4" cy="8.2" r="2" />
             <path d="M9.8 2.2l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z" />
           </svg>
-        </button>
+        </Link>
         <LanguageSwitcher />
       </div>
     </header>
