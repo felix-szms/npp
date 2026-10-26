@@ -8,11 +8,15 @@ export function SitePageHeader({ current }: { current: "history" | "frontier" })
   const { t, language } = useLanguage();
   return (
     <header className="site-page-header">
-      <Link href="/" className="page-brand">
-        <AtomMark />
-        <span className="page-wordmark">
-          {t("Nuclear Power Plant Principles")}
-          <em>{language === "zh" ? "深圳中学" : "SHENZHEN MIDDLE SCHOOL"}</em>
+      <Link href="/" className="wordmark page-brand">
+        <AtomMark className="brand-symbol" />
+        <span className="wordmark-text">
+          <span className="wordmark-main">
+            {language === "zh" ? "核电站原理" : "Nuclear Power Plant"}
+          </span>
+          <span className="wordmark-alt">
+            {language === "zh" ? "深圳中学" : "SHENZHEN MIDDLE SCHOOL"}
+          </span>
         </span>
       </Link>
       <nav className="page-nav" aria-label={t("Page navigation")}>

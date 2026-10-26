@@ -24,11 +24,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ```
 src/app/          入口（layout.tsx、page.tsx、globals.css）
-src/app/history/  核电简史互动页（四代筛选 + 世界/中国/深圳区域筛选）
-src/app/frontier/ 前沿核能互动页（类别筛选 + 卡片展开 + 聚变演示）
-src/components/   章节控制器、3D 场景组件、链式反应演示、语言切换
-src/lib/          概念数据模型（核子/裂变/反应堆/发电）、中英文案、历史时间线与前沿卡片数据（history.ts / frontier.ts）、配色（scene-colors.ts 为 3D 材质色，tokens.css 为 UI 令牌）
-src/styles/       设计令牌与各章样式（时间线/前沿卡片样式在 experience.css 末段）
+src/app/history/  核电简史互动页（四代筛选 + 世界/中国/深圳区域筛选 + 配图）
+src/app/frontier/ 前沿核能互动页（类别筛选 + 卡片展开 + 聚变演示 + 配图）
+src/components/   章节控制器、3D 场景组件、链式反应演示、语言切换、site-page-header
+src/lib/          概念数据模型（核子/裂变/反应堆/发电）、中英文案、历史时间线与前沿卡片数据（history.ts / frontier.ts，含 ImageAsset 图片字段）、配色（scene-colors.ts 为 3D 材质色，tokens.css 为 UI 令牌）
+src/styles/       设计令牌与各章样式（pages.css 为独立页样式；时间线/前沿卡片样式在 experience.css 末段）
+public/images/    本地真实图片：history/（cp1 秦山 大亚湾 华龙 石岛湾）+ frontier/（玲龙 石岛湾2 霞浦 熔盐堆 EAST 供暖）
 scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 .cozeproj/scripts/ 部署脚本（deploy_build.sh / deploy_run.sh，对应 .coze [deploy]）
 ```
@@ -39,6 +40,17 @@ scripts/          预览脚本（build.sh / run.sh，对应 .coze [dev]）
 - **聚变演示**（`fusion-demo.tsx`）：canvas 状态机 D+T→He-4+n（17.6 MeV），3.4s 时间轴，prefers-reduced-motion 直接呈现结果帧；canvas font 不支持 CSS var()，须用字面字体栈
 
 音效已整体移除：journey-audio.tsx / journey-sound.ts / public/audio/ 已删，勿再引入 AudioContext 相关代码。
+
+2026-10 图片模块（用户要求"不能只用纯文字讲解"）：
+- 数据侧 `ImageAsset`（定义在 lib/history.ts，frontier.ts 导入复用）：src + altEn/altZh + creditEn/creditZh，按 language 取双语；署名是合规底线，新增图片必须带 credit
+- 简史页 5 条里程碑挂图（1942 CP-1 / 1991 秦山 / 1994 大亚湾【深圳高亮】 / 2021 华龙一号 / 2023 石岛湾），渲染在 `.history-figure`（grid-column 3，max-width 380px）；前沿页 6 张卡片展开后显示 `.frontier-figure`
+- wordmark 排版对齐：独立页 header 复用全局 `.wordmark` 体系（experience.css 94-118 行，非 header 作用域），`.site-page-header .wordmark { color: inherit }`，与首页逐项 computed style 一致（18px serif / 同色 / 同字距）
+
+## 沙箱图片下载渠道（2026-10 实测）
+
+- **不可达**：Wikimedia 全域（commons/upload/zh.wikipedia）、iaea.org 403、nrc.gov 403、cnnc.com.cn 412、cgn.com.cn 不通、ipp.cas.cn 不通、GitHub API 匿名限流
+- **可直连且图源优质**：xinhuanet.com / news.cn（新华社图集，photo/ 路径是分页图集）、gov.cn、sasac.gov.cn（国资小新厂区图）、kjt.gansu.gov.cn、haiyang.gov.cn、dnmc.com.cn（大亚湾官网）、sd.chinadaily.com.cn、china-nea.cn、energy.gov、anl.gov（DOE 实验室图公有领域）
+- 流程：web_fetch 文章页拿正文与图注 → curl 下载（务必带浏览器 UA，部分站无 UA 返回 412）→ PIL 转 JPEG / 限宽 1200px → 存 public/images/；图片只存本地、运行期零外链是硬约束
 
 ## 关键入口 / 核心模块
 

@@ -1,12 +1,21 @@
 // Bilingual milestones for the nuclear-power history timeline.
 // region "world" | "china" | "shenzhen"; zh/en copy displayed per language.
 
+export type ImageAsset = {
+  src: string;
+  altEn: string;
+  altZh: string;
+  creditEn: string;
+  creditZh: string;
+};
+
 export type HistoryEntry = {
   year: string;
   region: "world" | "china" | "shenzhen";
   generation: 1 | 2 | 3 | 4;
   en: string;
   zh: string;
+  image?: ImageAsset;
 };
 
 export type GenerationBand = {
@@ -55,6 +64,13 @@ export const HISTORY_ENTRIES: HistoryEntry[] = [
     generation: 1,
     en: "Chicago Pile-1 achieves the first controlled chain reaction.",
     zh: "芝加哥 1 号堆实现人类首次可控链式反应。",
+    image: {
+      src: "/images/history/cp1.jpg",
+      altEn: "Drawing of Chicago Pile-1, a tall lattice of graphite and uranium",
+      altZh: "芝加哥 1 号堆建造示意图，石墨与铀砌成的巨型格栅",
+      creditEn: "Argonne National Laboratory (U.S. DOE)",
+      creditZh: "美国阿贡国家实验室",
+    },
   },
   {
     year: "1951",
@@ -104,6 +120,13 @@ export const HISTORY_ENTRIES: HistoryEntry[] = [
     generation: 2,
     en: "Qinshan connects to the grid — mainland nuclear power starts here. China becomes the 7th nation to build its own NPP.",
     zh: "秦山并网，中国大陆核电零的突破，中国成为世界第七个自行设计建造核电站的国家。",
+    image: {
+      src: "/images/history/qinshan.jpg",
+      altEn: "Aerial view of the Qinshan nuclear power base, Zhejiang",
+      altZh: "浙江秦山核电基地航拍",
+      creditEn: "Xinhua Net",
+      creditZh: "新华网",
+    },
   },
   {
     year: "1994",
@@ -111,6 +134,13 @@ export const HISTORY_ENTRIES: HistoryEntry[] = [
     generation: 2,
     en: "Daya Bay NPP enters commercial operation — mainland China's first large commercial plant, right here in Shenzhen, powering both Shenzhen and Hong Kong.",
     zh: "大亚湾核电站商运——中国大陆首座大型商用核电站，就在深圳，向深圳与香港供电。",
+    image: {
+      src: "/images/history/dayawan.jpg",
+      altEn: "Aerial view of Daya Bay Nuclear Power Station by the sea",
+      altZh: "大亚湾核电站海边航拍全景",
+      creditEn: "Daya Bay Nuclear Power Operations (via Jingbao)",
+      creditZh: "晶报 · 大亚湾核电供图",
+    },
   },
   {
     year: "2000",
@@ -139,6 +169,13 @@ export const HISTORY_ENTRIES: HistoryEntry[] = [
     generation: 3,
     en: "Hualong One enters commercial operation.",
     zh: "华龙一号投入商运。",
+    image: {
+      src: "/images/history/hualong.jpg",
+      altEn: "Drone view of the Hualong One global first reactor at Fuqing",
+      altZh: "无人机拍摄的华龙一号全球首堆（福清）外景",
+      creditEn: "Fuqing Nuclear Power Co. via Xinhua",
+      creditZh: "新华社发（福建福清核电有限公司供图）",
+    },
   },
   {
     year: "2023",
@@ -146,6 +183,13 @@ export const HISTORY_ENTRIES: HistoryEntry[] = [
     generation: 4,
     en: "Shidaowan HTGR goes commercial — a world first for Generation IV.",
     zh: "石岛湾高温气冷堆商运，四代核电全球首例。",
+    image: {
+      src: "/images/history/shidao.jpg",
+      altEn: "Shidaowan HTGR demonstration plant in Rongcheng, Shandong",
+      altZh: "山东荣成石岛湾高温气冷堆示范工程厂区",
+      creditEn: "SASAC of China",
+      creditZh: "国务院国资委网站",
+    },
   },
   {
     year: "2025",

@@ -176,6 +176,20 @@ export default function HistoryPage() {
                       </span>
                       {language === "zh" ? e.zh : e.en}
                     </p>
+                    {e.image ? (
+                      <figure className="history-figure">
+                        <img
+                          src={e.image.src}
+                          alt={language === "zh" ? e.image.altZh : e.image.altEn}
+                          loading="lazy"
+                        />
+                        <figcaption>
+                          {language === "zh"
+                            ? e.image.creditZh
+                            : e.image.creditEn}
+                        </figcaption>
+                      </figure>
+                    ) : null}
                   </li>
                 ))}
               </ol>

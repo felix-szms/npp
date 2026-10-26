@@ -1,5 +1,7 @@
 // Bilingual cards for frontier nuclear applications.
 
+import type { ImageAsset } from "./history";
+
 export type FrontierCard = {
   id: string;
   icon: "smr" | "htgr" | "sfr" | "msr" | "fusion" | "multi";
@@ -10,6 +12,7 @@ export type FrontierCard = {
   pointsZh: string[];
   statusEn: string;
   statusZh: string;
+  image?: ImageAsset;
 };
 
 export const FRONTIER_CARDS: FrontierCard[] = [
@@ -31,6 +34,13 @@ export const FRONTIER_CARDS: FrontierCard[] = [
     ],
     statusEn: "Under construction worldwide",
     statusZh: "全球多国在建",
+    image: {
+      src: "/images/frontier/linglong.jpg",
+      altEn: "Linglong One reactor core module after factory acceptance",
+      altZh: "通过出厂验收的玲龙一号反应堆核心模块",
+      creditEn: "Xinhua reporter Zhang Boqun",
+      creditZh: "新华社记者 张博群 摄",
+    },
   },
   {
     id: "htgr",
@@ -50,6 +60,13 @@ export const FRONTIER_CARDS: FrontierCard[] = [
     ],
     statusEn: "Commercial — Shidaowan, Shandong",
     statusZh: "已商运 —— 山东石岛湾",
+    image: {
+      src: "/images/frontier/shidao2.jpg",
+      altEn: "Shidaowan high-temperature gas-cooled reactor plant, Shandong",
+      altZh: "山东石岛湾高温气冷堆核电站示范工程厂区",
+      creditEn: "SASAC of China",
+      creditZh: "国务院国资委网站",
+    },
   },
   {
     id: "sfr",
@@ -69,6 +86,13 @@ export const FRONTIER_CARDS: FrontierCard[] = [
     ],
     statusEn: "Demonstration under construction",
     statusZh: "示范堆在建",
+    image: {
+      src: "/images/frontier/xiapu.jpg",
+      altEn: "Panorama of Xiapu Nuclear Power Station on the Fujian coast",
+      altZh: "福建霞浦核电站全景",
+      creditEn: "Xinhua Net",
+      creditZh: "新华网",
+    },
   },
   {
     id: "msr",
@@ -88,6 +112,13 @@ export const FRONTIER_CARDS: FrontierCard[] = [
     ],
     statusEn: "Experimental — Wuwei, Gansu",
     statusZh: "实验阶段 —— 甘肃武威",
+    image: {
+      src: "/images/frontier/tmsr.jpg",
+      altEn: "Thorium molten-salt experimental reactor building, Wuwei, Gansu",
+      altZh: "甘肃武威 2 兆瓦液态燃料钍基熔盐实验堆堆厂房",
+      creditEn: "Science and Technology Daily, photo by Chen Kexuan",
+      creditZh: "科技日报记者 陈可轩 摄",
+    },
   },
   {
     id: "fusion",
@@ -107,6 +138,13 @@ export const FRONTIER_CARDS: FrontierCard[] = [
     ],
     statusEn: "Research — EAST (Hefei), ITER, BEST",
     statusZh: "研究阶段 —— EAST（合肥）、ITER、BEST",
+    image: {
+      src: "/images/frontier/east.jpg",
+      altEn: "The EAST tokamak on Science Island, Hefei",
+      altZh: "合肥科学岛上的 EAST 全超导托卡马克装置",
+      creditEn: "Institute of Plasma Physics, CAS",
+      creditZh: "中国科学院等离子体物理研究所供图",
+    },
   },
   {
     id: "multi",
@@ -126,5 +164,12 @@ export const FRONTIER_CARDS: FrontierCard[] = [
     ],
     statusEn: "Deploying now",
     statusZh: "正在落地",
+    image: {
+      src: "/images/frontier/heating.jpg",
+      altEn: "Nuclear district-heating heat-exchange station in Haiyan",
+      altZh: "浙江海盐核能供暖换热首站外景",
+      creditEn: "Xinhua Net",
+      creditZh: "新华网",
+    },
   },
 ];

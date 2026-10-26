@@ -102,6 +102,24 @@ export default function FrontierPage() {
                 </button>
                 {open ? (
                   <div className="frontier-card-body">
+                    {card.image ? (
+                      <figure className="frontier-figure">
+                        <img
+                          src={card.image.src}
+                          alt={
+                            language === "zh"
+                              ? card.image.altZh
+                              : card.image.altEn
+                          }
+                          loading="lazy"
+                        />
+                        <figcaption>
+                          {language === "zh"
+                            ? card.image.creditZh
+                            : card.image.creditEn}
+                        </figcaption>
+                      </figure>
+                    ) : null}
                     <ul>
                       {(language === "zh" ? card.pointsZh : card.pointsEn).map(
                         (p) => (

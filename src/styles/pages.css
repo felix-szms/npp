@@ -29,16 +29,8 @@
 .page-brand svg {
   color: var(--amber);
 }
-.page-wordmark {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
-.page-wordmark em {
-  font-style: normal;
-  font: 10px var(--font-mono);
-  letter-spacing: 0.14em;
-  color: var(--muted);
+.site-page-header .wordmark {
+  color: inherit;
 }
 .page-nav {
   display: flex;
@@ -277,6 +269,28 @@
   }
 }
 
+/* entry figures (real photos) */
+.history-figure {
+  grid-column: 3;
+  margin: 8px 0 4px;
+  max-width: 380px;
+}
+.history-figure img,
+.frontier-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #a8bdc22e;
+}
+.history-figure figcaption,
+.frontier-figure figcaption {
+  font: 9.5px var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
 /* frontier cards */
 .page-grid {
   display: grid;
@@ -360,6 +374,11 @@
   border-top: 1px dashed #a8bdc226;
   padding-top: 10px;
 }
+.frontier-figure {
+  margin: 0;
+  border-bottom: 1px dashed #a8bdc226;
+  padding-bottom: 12px;
+}
 
 /* fusion demo (inside expanded fusion card) */
 .fusion-demo {
@@ -420,9 +439,6 @@
   }
   .site-page-header {
     padding: 10px 16px;
-  }
-  .page-wordmark span:first-child {
-    display: none;
   }
   .generation-bands.interactive {
     grid-template-columns: repeat(2, 1fr);
